@@ -18,10 +18,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
 import ru.spb.leti.pal.DictionaryPair;
 
 public class ResultWindow extends JFrame {
-
     private FieldPanel panel;
 
     public ResultWindow(FieldPanel panel, int numberOfMistakes, String timer) throws HeadlessException {
@@ -35,7 +35,7 @@ public class ResultWindow extends JFrame {
         int verticalBorder = Toolkit.getDefaultToolkit().getScreenSize().height / 200;
         int horizontalBorder = Toolkit.getDefaultToolkit().getScreenSize().height / 200;
 
-        constraints.insets = new Insets(verticalBorder, horizontalBorder, verticalBorder ,horizontalBorder);
+        constraints.insets = new Insets(verticalBorder, horizontalBorder, verticalBorder, horizontalBorder);
 
         constraints.weightx = 1;
         constraints.weighty = 1;
@@ -74,11 +74,10 @@ public class ResultWindow extends JFrame {
                             null,
                             options,
                             options[1]);
-                    if(n == 0) {
+                    if (n == 0) {
                         break;
                     }
-                }
-                else
+                } else
                     break;
             }
             panel.getGame().SaveMistakes(fileChooser.getCurrentDirectory() + File.separator + fileChooser.getSelectedFile().getName());
@@ -92,7 +91,7 @@ public class ResultWindow extends JFrame {
         startMistakesGameButton.addActionListener(e -> {
             int choice = displayChooseWindow();
 
-            switch (choice){
+            switch (choice) {
                 case 0:
                     panel.getGame().MistakesToLesson(panel.getGame().getLessonMistakes1(), Game.NumMistakeType.values()[choice]);
                     panel.startMistakeGame(false, null);
@@ -127,7 +126,7 @@ public class ResultWindow extends JFrame {
         });
         add(newGameButton, constraints);
 
-        if(numberOfMistakes == 0) {
+        if (numberOfMistakes == 0) {
             startMistakesGameButton.setEnabled(false);
             saveMistakesButton.setEnabled(false);
         }
@@ -140,9 +139,7 @@ public class ResultWindow extends JFrame {
 
     private int displayChooseWindow() {
         Object[] options = {"Левый список", "Правый список", "Оба списка сразу", "Оба списка по очереди"};
-        String ret = (String)JOptionPane.showInputDialog(panel.getWindow(), "Какой список ошибок запускать?", "Выбор", JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        String ret = (String) JOptionPane.showInputDialog(panel.getWindow(), "Какой список ошибок запускать?", "Выбор", JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
         return Arrays.asList(options).indexOf(ret);
-
     }
-
 }

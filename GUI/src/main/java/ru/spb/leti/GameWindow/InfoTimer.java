@@ -6,7 +6,6 @@ import java.awt.Toolkit;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
-
 public class InfoTimer extends JLabel {
     private int seconds;
     private int minutes;
@@ -35,7 +34,6 @@ public class InfoTimer extends JLabel {
     }
 
     private void increase() {
-
         if (seconds < 59) {
             seconds++;
         } else {
@@ -68,7 +66,6 @@ public class InfoTimer extends JLabel {
         seconds = timeInSeconds % 60;
         display();
     }
-
 
     String getTextTime() {
         StringBuilder out = new StringBuilder();

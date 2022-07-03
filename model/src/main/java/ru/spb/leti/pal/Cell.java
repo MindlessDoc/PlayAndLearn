@@ -1,30 +1,20 @@
 package ru.spb.leti.pal;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class Cell {
-    private DictionaryPair pair;          // пара - объект из словаря
-    private Position position;  // координаты ячейки на поле
-    private boolean flag;           // флаг для обозначения отображаемого слова
+    @Getter
+    private DictionaryPair pair;// пара - объект из словаря
+    @Getter @Setter
+    private Position position;// координаты ячейки на поле
+    @Getter
+    private boolean flag;// флаг для обозначения отображаемого слова
 
     public Cell(DictionaryPair pair, Position position, boolean flag) {
         this.pair = pair;
         this.flag = flag;
         this.position = position;
-    }
-
-    public DictionaryPair getPair() {
-        return pair;
-    }
-
-    public Position getPosition() {
-        return position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
-    public boolean getFlag() {
-        return flag;
     }
 
     @Override

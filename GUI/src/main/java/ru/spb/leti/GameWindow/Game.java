@@ -1,7 +1,6 @@
 package ru.spb.leti.GameWindow;
 
 import java.io.File;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -17,6 +16,9 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import ru.spb.leti.pal.Cell;
 import ru.spb.leti.pal.DictionaryPair;
 import ru.spb.leti.pal.Lesson;
@@ -24,91 +26,44 @@ import ru.spb.leti.pal.Move;
 import ru.spb.leti.pal.Position;
 
 public class Game {
-    private Cell[][] Field;                                        // Поле
-    private Position FieldSize;                                    // Размеры поля
-    private Lesson curLesson;                                      // Текущий урок
-    private int NumberOfSteps;                                     // Количество этапов в уроке
-    private LinkedList<DictionaryPair> LessonMistakes1;            // Список ошибок (верные пары левых)
-    private LinkedList<DictionaryPair> LessonMistakes2;            // Список ошибок (верные пары правых)
-    private int NumCorrectAnsw;                                    // Кол-во верных ответов на уроке
-    private int localMistakes;                                         // Кол-во ошибок на этапе
-    private int offset;                                            // Смещение относительно начала словаря
-    private LinkedList<Integer> NumElemOfMatrix;                   // Распределение элементов по матрицам
-    private Move LastMove;                                         // Последный ход
-    private boolean MixFlag;                                       // Флаг перемешивания (при загрузке этапа)
-    private boolean OddFlagForDistribution;                        // Флаг "плохого" размера поля (нечетная вертикаль)
+    @Getter
+    private Cell[][] field;// Поле
+    @Getter
+    private Position fieldSize;// Размеры поля
+    @Getter
+    private Lesson curLesson;// Текущий урок
+    @Getter
+    private int numberOfSteps;// Количество этапов в уроке
+    @Getter
+    private LinkedList<DictionaryPair> lessonMistakes1;// Список ошибок (верные пары левых)
+    @Getter
+    private LinkedList<DictionaryPair> lessonMistakes2;// Список ошибок (верные пары правых)
+    private int numCorrectAnsw;// Кол-во верных ответов на уроке
+    private int localMistakes;// Кол-во ошибок на этапе
+    private int offset;// Смещение относительно начала словаря
+    private LinkedList<Integer> numElemOfMatrix;// Распределение элементов по матрицам
+    @Getter @Setter
+    private Move lastMove;// Последный ход
+    @Setter
+    private boolean mixFlag;// Флаг перемешивания (при загрузке этапа)
+    private boolean oddFlagForDistribution;// Флаг "плохого" размера поля (нечетная вертикаль)
 
     public Game(int vertical, int horizontal) {
         setSize(vertical, horizontal);
     }
 
     /**
-     * @return - игровое поле
-     */
-    public Cell[][] getField() {
-        return Field;
-    }
-
-    /**
-     * @return - номер текущего этапа
+     * @return номер текущего этапа
      */
     public int getNumOfCurStep() {
-        return !NumElemOfMatrix.isEmpty() ? NumberOfSteps - NumElemOfMatrix.size() + 1 : NumberOfSteps;
-    }
-
-    /**
-     * @return - количество этапов урока
-     */
-    public int getNumberOfSteps() {
-        return NumberOfSteps;
+        return !numElemOfMatrix.isEmpty() ? numberOfSteps - numElemOfMatrix.size() + 1 : numberOfSteps;
     }
 
     /**
      * @return - количество совершенных ошибок за урок
      */
     public int getNumMistakes() {
-        return LessonMistakes1.size();
-    }
-
-    /**
-     * @return - список пар левых ошибок
-     */
-    public LinkedList<DictionaryPair> getLessonMistakes1() {
-        return LessonMistakes1;
-    }
-
-    /**
-     * @return - список пар правых ошибок
-     */
-    public LinkedList<DictionaryPair> getLessonMistakes2() {
-        return LessonMistakes2;
-    }
-
-    /**
-     * Сеттер флага автоматического перемешивания
-     *
-     * @param mixFlag - true/false - перемешивать / не перемешивать
-     */
-    public void setMixFlag(boolean mixFlag) {
-        MixFlag = mixFlag;
-    }
-
-    public Move getLastMove() {
-        return LastMove;
-    }
-
-    /**
-     * Сеттер последнего хода
-     *
-     * @param lastMove - последний ход
-     */
-    public void setLastMove(Move lastMove) {
-
-        LastMove = lastMove;
-    }
-
-    public Position getFieldSize() {
-        return FieldSize;
+        return lessonMistakes1.size();
     }
 
     /**
@@ -118,8 +73,8 @@ public class Game {
      * @param vertical   - высота
      */
     public void setSize(int vertical, int horizontal) {
-        FieldSize = new Position(vertical, horizontal);
-        OddFlagForDistribution = vertical % 2 == 1;
+        fieldSize = new Position(vertical, horizontal);
+        oddFlagForDistribution = vertical % 2 == 1;
     }
 
     /**
@@ -128,7 +83,6 @@ public class Game {
      * @param file - файл-словарь
      */
     public boolean newLesson(File file) {
-
         if (curLesson == null) {
             curLesson = new Lesson();
         }
@@ -144,13 +98,13 @@ public class Game {
      * Подготовка урока к запуску
      */
     private void prepareLesson() {
-        LessonMistakes1 = new LinkedList<>();
-        LessonMistakes2 = new LinkedList<>();
-        NumCorrectAnsw = 0;
+        lessonMistakes1 = new LinkedList<>();
+        lessonMistakes2 = new LinkedList<>();
+        numCorrectAnsw = 0;
         offset = 0;
         localMistakes = 0;
-        NumElemOfMatrix = new LinkedList<>();
-        NumberOfSteps = CalculateFields();  // рассчёт матричного заполнения
+        numElemOfMatrix = new LinkedList<>();
+        numberOfSteps = CalculateFields();  // рассчёт матричного заполнения
     }
 
     /**
@@ -158,7 +112,7 @@ public class Game {
      */
     private int CalculateFields() {
         int NumElem = curLesson.getDictionary().size();                          // всего элементов
-        int MatrixElem = FieldSize.getHorizontal() * FieldSize.getVertical() / 2;         // пар в матрице заданного размера
+        int MatrixElem = fieldSize.getHorizontal() * fieldSize.getVertical() / 2;         // пар в матрице заданного размера
         int NumOfMatrix = (int) Math.ceil((double) NumElem / MatrixElem);    // количество необходимых матриц
         int AverageNumberOfCells = NumElem;
         if (NumElem > MatrixElem)
@@ -170,7 +124,7 @@ public class Game {
                 Num++;
                 delta--;
             }
-            NumElemOfMatrix.addLast(Num);
+            numElemOfMatrix.addLast(Num);
         }
         return NumOfMatrix;
     }
@@ -181,43 +135,43 @@ public class Game {
      * @return true - если поля ещё есть (и после выполнения очередное поле выставлено), false - если полей урока больше нет
      */
     public boolean nextField() {
-        if (!NumElemOfMatrix.isEmpty()) {
-            Field = new Cell[FieldSize.getVertical()][FieldSize.getHorizontal()];
-            int NumElem = NumElemOfMatrix.getFirst();                       // необходимое кол-во пар в текущей матрице
+        if (!numElemOfMatrix.isEmpty()) {
+            field = new Cell[fieldSize.getVertical()][fieldSize.getHorizontal()];
+            int NumElem = numElemOfMatrix.getFirst();                       // необходимое кол-во пар в текущей матрице
             int i = 0;
-            if (!OddFlagForDistribution) {
-                for (int j = 0; j < Field.length / 2; j++) {
-                    for (int k = 0; k < Field[j].length; k++) {
+            if (!oddFlagForDistribution) {
+                for (int j = 0; j < field.length / 2; j++) {
+                    for (int k = 0; k < field[j].length; k++) {
                         if (i < NumElem) {
                             Cell first = new Cell(curLesson.getDictionary().get(offset + i), new Position(j, k), false);
-                            Cell second = new Cell(curLesson.getDictionary().get(offset + i), new Position(Field.length / 2 + j, k), true); // Для второй(парной) ячейки в матрице
+                            Cell second = new Cell(curLesson.getDictionary().get(offset + i), new Position(field.length / 2 + j, k), true); // Для второй(парной) ячейки в матрице
                             i++;
-                            Field[j][k] = first;
-                            Field[Field.length / 2 + j][k] = second;
+                            field[j][k] = first;
+                            field[field.length / 2 + j][k] = second;
                         } else
                             break;
                     }
                 }
             } else {
                 int j = 0;
-                while (j < FieldSize.getVertical() * FieldSize.getHorizontal()) {
-                    int row1 = j / FieldSize.getHorizontal();
-                    int column1 = j % FieldSize.getHorizontal();
+                while (j < fieldSize.getVertical() * fieldSize.getHorizontal()) {
+                    int row1 = j / fieldSize.getHorizontal();
+                    int column1 = j % fieldSize.getHorizontal();
                     j++;
-                    int row2 = j / FieldSize.getHorizontal();
-                    int column2 = j % FieldSize.getHorizontal();
+                    int row2 = j / fieldSize.getHorizontal();
+                    int column2 = j % fieldSize.getHorizontal();
                     j++;
                     if (i < NumElem) {
                         Cell first = new Cell(curLesson.getDictionary().get(offset + i), new Position(row1, column1), false);
                         Cell second = new Cell(curLesson.getDictionary().get(offset + i), new Position(row2, column2), true); // Для второй(парной) ячейки в матрице
                         i++;
-                        Field[row1][column1] = first;
-                        Field[row2][column2] = second;
+                        field[row1][column1] = first;
+                        field[row2][column2] = second;
                     } else
                         break;
                 }
             }
-            if (MixFlag)
+            if (mixFlag)
                 mixField();
             offset = offset + NumElem;
             return true;
@@ -229,23 +183,23 @@ public class Game {
      * Перемешивание поля
      */
     public void mixField() {
-        if (Field != null) {
-            for (int i = 0; i < Field.length; i++)
-                for (int j = 0; j < Field[i].length; j++) {
+        if (field != null) {
+            for (int i = 0; i < field.length; i++)
+                for (int j = 0; j < field[i].length; j++) {
                     Random rand = new Random();
-                    int a = rand.nextInt(Field.length);
-                    int b = rand.nextInt(Field[i].length);
+                    int a = rand.nextInt(field.length);
+                    int b = rand.nextInt(field[i].length);
                     while (a == i && b == j) {
-                        a = rand.nextInt(Field.length);
-                        b = rand.nextInt(Field[i].length);
+                        a = rand.nextInt(field.length);
+                        b = rand.nextInt(field[i].length);
                     }
-                    Cell tmp = Field[a][b];
-                    Field[a][b] = Field[i][j];
-                    Field[i][j] = tmp;
-                    if (Field[a][b] != null)
-                        Field[a][b].setPosition(new Position(a, b));
-                    if (Field[i][j] != null)
-                        Field[i][j].setPosition(new Position(i, j));
+                    Cell tmp = field[a][b];
+                    field[a][b] = field[i][j];
+                    field[i][j] = tmp;
+                    if (field[a][b] != null)
+                        field[a][b].setPosition(new Position(a, b));
+                    if (field[i][j] != null)
+                        field[i][j].setPosition(new Position(i, j));
                 }
         }
     }
@@ -258,32 +212,29 @@ public class Game {
      * @return - true - если ячейки совместимы
      */
     public boolean compareCell(Position a, Position b) {
-        Cell first = Field[a.getVertical()][a.getHorizontal()];
-        Cell second = Field[b.getVertical()][b.getHorizontal()];
+        Cell first = field[a.getVertical()][a.getHorizontal()];
+        Cell second = field[b.getVertical()][b.getHorizontal()];
         boolean compareFlag = isCompatible(first, second);
-        setLastMove(new Move(Field[a.getVertical()][a.getHorizontal()], Field[b.getVertical()][b.getHorizontal()]));
+        setLastMove(new Move(field[a.getVertical()][a.getHorizontal()], field[b.getVertical()][b.getHorizontal()]));
         if (compareFlag) {
-            Field[a.getVertical()][a.getHorizontal()] = null;
-            Field[b.getVertical()][b.getHorizontal()] = null;
-            NumCorrectAnsw++;
-            if (NumCorrectAnsw == NumElemOfMatrix.getFirst()) {
-                NumElemOfMatrix.removeFirst();
+            field[a.getVertical()][a.getHorizontal()] = null;
+            field[b.getVertical()][b.getHorizontal()] = null;
+            numCorrectAnsw++;
+            if (numCorrectAnsw == numElemOfMatrix.getFirst()) {
+                numElemOfMatrix.removeFirst();
                 localMistakes = 0;
-                NumCorrectAnsw = 0;
+                numCorrectAnsw = 0;
                 setLastMove(null);
                 return true;
             }
         } else {
             localMistakes++;
-            if (first.getFlag())
-            {
-                LessonMistakes1.addLast(second.getPair());
-                LessonMistakes2.addLast(first.getPair());
-            }
-            else
-            {
-                LessonMistakes1.addLast(first.getPair());
-                LessonMistakes2.addLast(second.getPair());
+            if (first.isFlag()) {
+                lessonMistakes1.addLast(second.getPair());
+                lessonMistakes2.addLast(first.getPair());
+            } else {
+                lessonMistakes1.addLast(first.getPair());
+                lessonMistakes2.addLast(second.getPair());
             }
         }
         return compareFlag;
@@ -303,7 +254,7 @@ public class Game {
         String secondStr;
         boolean flag1 = false;
         boolean flag2 = false;
-        if (first.getFlag()) {
+        if (first.isFlag()) {
             // Если первая ячейка отображает правое слово
             firstStr = toNormalString(first.getPair().getSecond());
             secondStr = toNormalString(second.getPair().getFirst());
@@ -369,16 +320,16 @@ public class Game {
      * - неверного - удаление из таблицы ошибок (уменьшение кол-ва ошибок)
      */
     public void undo() {
-        if (LastMove != null) {
-            Position f = LastMove.getFirst().getPosition();
-            Position s = LastMove.getSecond().getPosition();
-            Field[f.getVertical()][f.getHorizontal()] = LastMove.getFirst();
-            Field[s.getVertical()][s.getHorizontal()] = LastMove.getSecond();
-            if (isCompatible(LastMove.getFirst(), LastMove.getSecond())) {
-                NumCorrectAnsw--;
+        if (lastMove != null) {
+            Position f = lastMove.getFirst().getPosition();
+            Position s = lastMove.getSecond().getPosition();
+            field[f.getVertical()][f.getHorizontal()] = lastMove.getFirst();
+            field[s.getVertical()][s.getHorizontal()] = lastMove.getSecond();
+            if (isCompatible(lastMove.getFirst(), lastMove.getSecond())) {
+                numCorrectAnsw--;
             } else {
-                LessonMistakes1.removeLast();
-                LessonMistakes2.removeLast();
+                lessonMistakes1.removeLast();
+                lessonMistakes2.removeLast();
                 localMistakes--;
             }
             setLastMove(null);
@@ -396,8 +347,8 @@ public class Game {
             build.append(curLesson.getLessonName());
             build.setLength(build.length() - 4);
             try {
-                MistakesToFile(LessonMistakes1, build.toString() + "(err1).txt");
-                MistakesToFile(LessonMistakes2, build.toString() + "(err2).txt");
+                MistakesToFile(lessonMistakes1, build.toString() + "(err1).txt");
+                MistakesToFile(lessonMistakes2, build.toString() + "(err2).txt");
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "Не удалось сохранить ошибки", "Ошибка сохранения ошибок", JOptionPane.ERROR_MESSAGE, null);
             }
@@ -411,21 +362,17 @@ public class Game {
     private void MistakesToFile(LinkedList<DictionaryPair> a, String fileName) throws IOException {
         if (a != null) {
             //BufferedWriter out = null;
-            try(Writer out = new OutputStreamWriter(new FileOutputStream(fileName), StandardCharsets.UTF_8)) {
+            try (Writer out = new OutputStreamWriter(new FileOutputStream(fileName), StandardCharsets.UTF_8)) {
                 for (DictionaryPair err : a)
                     out.write(err.getFirst() + "\t" + err.getSecond() + "\n");
             }
         }
     }
 
-    public Lesson getCurLesson() {
-        return curLesson;
-    }
-
     /**
      * Создает урок из поданного списка
-     * @param list - список для создания урока
-
+     *
+     * @param list    - список для создания урока
      * @param numType - тип списка
      */
     public void MistakesToLesson(LinkedList<DictionaryPair> list, NumMistakeType numType) {
@@ -462,22 +409,22 @@ public class Game {
      */
     public boolean SaveProgress(String fileName, int TimeSec) {
         String saveName = fileName + ".savepr";
-        try(Writer save = new OutputStreamWriter(new FileOutputStream(saveName), StandardCharsets.UTF_8)) {
+        try (Writer save = new OutputStreamWriter(new FileOutputStream(saveName), StandardCharsets.UTF_8)) {
             save.write(curLesson.getLessonName() + "\n");                   // Название урока
             save.write(curLesson.getDictionary().size() + " " + offset + "\n");      // Кол-во слов словаря, смещение в словаре
             for (int i = 0; i < curLesson.getDictionary().size(); i++)          // Пары словарь
                 save.write(curLesson.getDictionary().get(i).toString() + "\n");
-            save.write(NumElemOfMatrix.size() + " ");               // Количество матриц
-            for (int a : NumElemOfMatrix)                               // Матричное распределение
+            save.write(numElemOfMatrix.size() + " ");               // Количество матриц
+            for (int a : numElemOfMatrix)                               // Матричное распределение
                 save.write(a + " ");
             save.write("\n");
-            save.write(FieldSize.getVertical() + " " + FieldSize.getHorizontal()); // Размер поля
+            save.write(fieldSize.getVertical() + " " + fieldSize.getHorizontal()); // Размер поля
             save.write("\n");
-            for (Cell[] arr : Field) // Запись поля
+            for (Cell[] arr : field) // Запись поля
             {
                 for (Cell a : arr) {
                     if (a != null) { // Индекс пары в словаре + флаг
-                        if (a.getFlag())
+                        if (a.isFlag())
                             save.write(curLesson.getDictionary().indexOf(a.getPair()) + " 1 ");
                         else
                             save.write(curLesson.getDictionary().indexOf(a.getPair()) + " 0 ");
@@ -488,11 +435,11 @@ public class Game {
             }
             SaveLastMove(save);
             save.write("\n");
-            save.write(TimeSec + " " + NumCorrectAnsw + " " + LessonMistakes1.size() + "\n");  // Значение таймера, кол-во верных ответов, ошибок
-            for (DictionaryPair a : LessonMistakes1) // Сохранение первого списка ошибок
+            save.write(TimeSec + " " + numCorrectAnsw + " " + lessonMistakes1.size() + "\n");  // Значение таймера, кол-во верных ответов, ошибок
+            for (DictionaryPair a : lessonMistakes1) // Сохранение первого списка ошибок
                 save.write(curLesson.getDictionary().indexOf(a) + " ");
             save.write("\n");
-            for (DictionaryPair a : LessonMistakes2) // Сохранение второго списка ошибок
+            for (DictionaryPair a : lessonMistakes2) // Сохранение второго списка ошибок
                 save.write(curLesson.getDictionary().indexOf(a) + " ");
             save.write("\n");
         } catch (IOException e) {
@@ -510,15 +457,15 @@ public class Game {
      * @throws IOException - Input/Output Exception
      */
     private void SaveLastMove(Writer save) throws IOException {
-        if (LastMove != null) {
-            Cell cell = LastMove.getFirst();
-            if (cell.getFlag())
+        if (lastMove != null) {
+            Cell cell = lastMove.getFirst();
+            if (cell.isFlag())
                 save.write(curLesson.getDictionary().indexOf(cell.getPair()) + " 1 ");
             else
                 save.write(curLesson.getDictionary().indexOf(cell.getPair()) + " 0 ");
             save.write(cell.getPosition().toString() + " ");
-            cell = LastMove.getSecond();
-            if (cell.getFlag())
+            cell = lastMove.getSecond();
+            if (cell.isFlag())
                 save.write(curLesson.getDictionary().indexOf(cell.getPair()) + " 1 ");
             else
                 save.write(curLesson.getDictionary().indexOf(cell.getPair()) + " 0 ");
@@ -543,39 +490,39 @@ public class Game {
             load.nextLine();
             for (int i = 0; i < SizeDict; i++)                      // Пары словаря
                 curLesson.getDictionary().add(DictionaryPair.readPair(load));
-            NumberOfSteps = load.nextInt();                         // Кол-во шагов
-            NumElemOfMatrix.clear();
-            for (int i = 0; i < NumberOfSteps; i++)                     // Матричное распределение
-                NumElemOfMatrix.addLast(load.nextInt());
+            numberOfSteps = load.nextInt();                         // Кол-во шагов
+            numElemOfMatrix.clear();
+            for (int i = 0; i < numberOfSteps; i++)                     // Матричное распределение
+                numElemOfMatrix.addLast(load.nextInt());
             load.nextLine();
-            FieldSize.setVertical(load.nextInt());
-            FieldSize.setHorizontal(load.nextInt());
+            fieldSize.setVertical(load.nextInt());
+            fieldSize.setHorizontal(load.nextInt());
             load.nextLine();
-            Field = new Cell[FieldSize.getVertical()][FieldSize.getHorizontal()];
-            for (int i = 0; i < FieldSize.getVertical(); i++)                      // Считывание поля
+            field = new Cell[fieldSize.getVertical()][fieldSize.getHorizontal()];
+            for (int i = 0; i < fieldSize.getVertical(); i++)                      // Считывание поля
             {
-                for (int j = 0; j < FieldSize.getVertical(); j++) {
+                for (int j = 0; j < fieldSize.getVertical(); j++) {
                     int index = load.nextInt();
                     int flag = load.nextInt();
                     if (index != -1) {                                                        // Индекс пары в словаре + флаг
                         if (flag == 1)
-                            Field[i][j] = new Cell(curLesson.getDictionary().get(index), new Position(i, j), true);
+                            field[i][j] = new Cell(curLesson.getDictionary().get(index), new Position(i, j), true);
                         else
-                            Field[i][j] = new Cell(curLesson.getDictionary().get(index), new Position(i, j), false);
+                            field[i][j] = new Cell(curLesson.getDictionary().get(index), new Position(i, j), false);
                     } else
-                        Field[i][j] = null;
+                        field[i][j] = null;
                 }
             }
-            LastMove = readSaveMove(load);          // Последний сделанный ход
+            lastMove = readSaveMove(load);          // Последний сделанный ход
             load.nextLine();
             TimeSec = load.nextInt();
-            NumCorrectAnsw = load.nextInt();
+            numCorrectAnsw = load.nextInt();
             int NumAllMistakes = load.nextInt();
             for (int i = 0; i < NumAllMistakes; i++)                         // Загрука первого списка ошибок
-                LessonMistakes1.add(curLesson.getDictionary().get(load.nextInt()));
+                lessonMistakes1.add(curLesson.getDictionary().get(load.nextInt()));
             load.nextLine();
             for (int i = 0; i < NumAllMistakes; i++)                         // Загрузка второго списка ошибок
-                LessonMistakes2.add(curLesson.getDictionary().get(load.nextInt()));
+                lessonMistakes2.add(curLesson.getDictionary().get(load.nextInt()));
         } catch (IOException | InputMismatchException e) {
             return -1;
         }
@@ -584,13 +531,26 @@ public class Game {
 
     private String toNormalString(String inputString) {
         char[] input = inputString.toCharArray();
-        String output="";
+        String output = "";
         char lastPushedSymb = ' ';
-        for (int i=0; i < inputString.length(); i++) {
-            if (lastPushedSymb == '\\'){
+        for (int i = 0; i < inputString.length(); i++) {
+            if (lastPushedSymb == '\\') {
                 switch (input[i]) {
-                    case '1': case '2': case '3': case '4': case '5': case '6':
-                    case 'р': case 'о': case 'з': case 'г': case 'с': case 'ф': case 'ч': case 'е': case 'к':
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case 'р':
+                    case 'о':
+                    case 'з':
+                    case 'г':
+                    case 'с':
+                    case 'ф':
+                    case 'ч':
+                    case 'е':
+                    case 'к':
                     case '\\':
                         // if (i != 1 && input[i+1] != '\\')
                         //output += '';
@@ -598,7 +558,7 @@ public class Game {
                         continue;
                 }
             }
-            if (input[i] == '\\'){
+            if (input[i] == '\\') {
                 lastPushedSymb = input[i];
                 continue;
             }

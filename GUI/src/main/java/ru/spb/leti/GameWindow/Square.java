@@ -8,21 +8,23 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.Timer;
 
+import lombok.Getter;
+
 import ru.spb.leti.pal.Cell;
 import ru.spb.leti.pal.Position;
 
-
 public class Square extends JButton {
-
     private boolean pressed;
     private boolean selected;
     private boolean wrong;
+
+    @Getter
     private SquareType type;
     private FieldPanel parent;
+    @Getter
     private Position position;
     private Timer timer;
     private Cell cell = null;
-
 
     public Square(FieldPanel parent, Cell cell) {
         this.parent = parent;
@@ -35,7 +37,7 @@ public class Square extends JButton {
         this.removeAll();
         if(cell != null) {
             this.position = cell.getPosition();
-            if(cell.getFlag()) {
+            if(cell.isFlag()) {
                 this.type = SquareType.RIGHT;
                 StrTransform.transform(this, cell.getPair().getSecond(), (int)(getHeight() * 0.9));
             } else {
@@ -50,7 +52,6 @@ public class Square extends JButton {
         this.pressed = false;
         redraw();
     }
-
 
     void redraw() {
         removeAll();
@@ -67,7 +68,6 @@ public class Square extends JButton {
         updateUI();
         update(getGraphics());
     }
-
 
     private void init() {
         setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2));
@@ -125,10 +125,6 @@ public class Square extends JButton {
         }
     }
 
-    private SquareType getType() {
-        return type;
-    }
-
     private void select() {
         selected = true;
         setBackground(Color.YELLOW);
@@ -143,16 +139,11 @@ public class Square extends JButton {
         }
     }
 
-
     public void setFinal() {
         type = SquareType.FINAL;
         removeAll();
         setBackground(new Color(34, 139, 34));
         setText("");
-    }
-
-    public Position getPosition() {
-        return position;
     }
 
     void setWrong() {
@@ -173,11 +164,9 @@ public class Square extends JButton {
         }
     }
 
-
     private enum SquareType{
         LEFT,
         RIGHT,
         FINAL
     }
-
 }

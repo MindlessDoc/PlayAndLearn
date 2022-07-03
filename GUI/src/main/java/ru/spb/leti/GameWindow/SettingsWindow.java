@@ -20,12 +20,10 @@ import javax.swing.WindowConstants;
 import static ru.spb.leti.StartWindow.StartWindow.isNumeric;
 
 public class SettingsWindow extends JFrame {
-
     private GameWindow window;
 
     public SettingsWindow(GameWindow window, int fieldSizeX, int fieldSizeY, int cellSizeX, int cellSizeY) throws HeadlessException {
         this.window = window;
-
 
         GridBagLayout layout = new GridBagLayout();
         GridBagConstraints constraints = new GridBagConstraints();
@@ -74,7 +72,6 @@ public class SettingsWindow extends JFrame {
         cellSizeFieldY.setFont(font);
         cellSizeFieldY.setText(String.valueOf(cellSizeY));
         cellSizeFieldY.setToolTipText("Укажите высоту ячейки (>=0) ");
-
 
         constraints.fill = GridBagConstraints.HORIZONTAL;
 

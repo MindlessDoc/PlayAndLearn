@@ -10,11 +10,16 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
+import lombok.Getter;
 
 public class InfoPanel extends JPanel {
+    @Getter
     private GameWindow window;
+    @Getter
     private InfoTimer timer;
+    @Getter
     private InfoMistakeCounter mistakeCounter;
+    @Getter
     private InfoProgress progress;
     private JCheckBox mixCheckBox;
     private JButton undoButton;
@@ -63,9 +68,9 @@ public class InfoPanel extends JPanel {
         constraints.anchor = GridBagConstraints.PAGE_END;
         constraints.gridy++;
         constraints.weighty = 0.5;
-        JCheckBox mixCheckBox = new JCheckBox("Перемешивать",true);
+        JCheckBox mixCheckBox = new JCheckBox("Перемешивать", true);
         this.mixCheckBox = mixCheckBox;
-        mixCheckBox.setFont(new Font("Arial", Font.BOLD ,Toolkit.getDefaultToolkit().getScreenSize().height / 83));
+        mixCheckBox.setFont(new Font("Arial", Font.BOLD, Toolkit.getDefaultToolkit().getScreenSize().height / 83));
         mixCheckBox.addActionListener(e -> {
                     if (window.getInfoPanel().getMixCheckBox().isSelected()) window.getFieldPanel().getGame().setMixFlag(true);
                     else window.getFieldPanel().getGame().setMixFlag(false);
@@ -92,22 +97,6 @@ public class InfoPanel extends JPanel {
         progress.setVisible(false);
         mistakeCounter.setVisible(false);
         setMinimumSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().height / 8, Toolkit.getDefaultToolkit().getScreenSize().height / 2));
-    }
-
-    private GameWindow getWindow() {
-        return window;
-    }
-
-    public InfoMistakeCounter getMistakeCounter() {
-        return mistakeCounter;
-    }
-
-    public InfoProgress getProgress() {
-        return progress;
-    }
-
-    public InfoTimer getTimer() {
-        return timer;
     }
 
     public void startAll() {

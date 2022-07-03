@@ -5,9 +5,11 @@ import java.awt.Toolkit;
 
 import javax.swing.JLabel;
 
-public class InfoProgress extends JLabel {
+import lombok.Setter;
 
+public class InfoProgress extends JLabel {
     private int numberOfSteps = 1;
+    @Setter
     private int currentStep;
 
     public InfoProgress() {
@@ -17,7 +19,7 @@ public class InfoProgress extends JLabel {
     }
 
     void increase() {
-        if(currentStep != numberOfSteps) {
+        if (currentStep != numberOfSteps) {
             currentStep++;
         }
         display();
@@ -26,10 +28,6 @@ public class InfoProgress extends JLabel {
     public void setNumberOfSteps(int numberOfSteps) {
         this.numberOfSteps = numberOfSteps;
         display();
-    }
-
-    public void setCurrentStep(int currentStep) {
-        this.currentStep = currentStep;
     }
 
     void display() {

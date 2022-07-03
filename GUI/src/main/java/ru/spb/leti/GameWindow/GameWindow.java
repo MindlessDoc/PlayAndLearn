@@ -21,23 +21,28 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import lombok.Getter;
 
 public class GameWindow extends JFrame {
+    @Getter
+    private FieldPanel fieldPanel;
+    private InfoPanel infoPanel;
+
+    private int vertical;
+    private int horizontal;
+    private int cellSizeX;
+    private int cellXizeY;
 
     public InfoPanel getInfoPanel() {
         return infoPanel;
     }
-
-    private FieldPanel fieldPanel;
-    private InfoPanel infoPanel;
-    private int vertical, horizontal, cellSizeX, cellXizeY;
-
 
     public GameWindow(int vertical, int horizontal, int cellSizeX, int cellSizeY) {
         this.vertical = vertical;
         this.horizontal = horizontal;
         this.cellSizeX = cellSizeX;
         this.cellXizeY = cellSizeY;
+
         init();
         setMenuBars();
     }
@@ -53,12 +58,12 @@ public class GameWindow extends JFrame {
             FileNameExtensionFilter filter = new FileNameExtensionFilter("Save files", "savepr");
             fileChooser.addChoosableFileFilter(filter);
             int approval = fileChooser.showOpenDialog(null);
-            if(approval != JFileChooser.APPROVE_OPTION) {
+            if (approval != JFileChooser.APPROVE_OPTION) {
                 return;
             }
             Game game = new Game(2, 2);
             game.LoadProgress(fileChooser.getCurrentDirectory() + File.separator + fileChooser.getSelectedFile().getName());
-            if(game.getFieldSize().getHorizontal() == horizontal && game.getFieldSize().getVertical() == vertical) {
+            if (game.getFieldSize().getHorizontal() == horizontal && game.getFieldSize().getVertical() == vertical) {
                 continueGame(fileChooser.getCurrentDirectory() + File.separator + fileChooser.getSelectedFile().getName());
             } else {
                 JOptionPane.showMessageDialog(null, "Размер поля сохранения не совпадает с текущим.\nИзмените рамер поля на " + game.getFieldSize().getHorizontal() + " x " + game.getFieldSize().getVertical(), "Несоответсвие размера поля", JOptionPane.ERROR_MESSAGE);
@@ -73,10 +78,10 @@ public class GameWindow extends JFrame {
             FileNameExtensionFilter filter = new FileNameExtensionFilter("Save files", "savepr");
             fileChooser.addChoosableFileFilter(filter);
             int approval = fileChooser.showSaveDialog(null);
-            if(approval != JFileChooser.APPROVE_OPTION) {
+            if (approval != JFileChooser.APPROVE_OPTION) {
                 return;
             }
-            if(!fieldPanel.getGame().SaveProgress(fileChooser.getCurrentDirectory() + File.separator + fileChooser.getSelectedFile().getName(), infoPanel.getTimer().getTime())) {
+            if (!fieldPanel.getGame().SaveProgress(fileChooser.getCurrentDirectory() + File.separator + fileChooser.getSelectedFile().getName(), infoPanel.getTimer().getTime())) {
                 JOptionPane.showMessageDialog(null, "Не удалось сохранить файл", "Ошибка", JOptionPane.ERROR_MESSAGE);
             }
         });
@@ -106,12 +111,11 @@ public class GameWindow extends JFrame {
                             null,
                             options,
                             options[1]);
-                    if(n == 0) {
+                    if (n == 0) {
                         break;
                     }
 
-                }
-                else
+                } else
                     break;
             }
             fieldPanel.getGame().SaveMistakes(fileChooser.getCurrentDirectory() + File.separator + fileChooser.getSelectedFile().getName());
@@ -141,7 +145,7 @@ public class GameWindow extends JFrame {
                     null,
                     options,
                     options[1]);
-            if(n == 0) {
+            if (n == 0) {
                 stopGame();
             }
 
@@ -153,10 +157,9 @@ public class GameWindow extends JFrame {
         JMenuItem settingsMenuItem = new JMenuItem("Настройки");
         settingsMenuItem.addActionListener(e -> {
             SwingUtilities.invokeLater(() -> {
-                if(fieldPanel.isInProcess()) {
+                if (fieldPanel.isInProcess()) {
                     JOptionPane.showMessageDialog(null, "Нельзя изменить параметры размер поля/ячейки пока идет игра!", "Ошибка", JOptionPane.ERROR_MESSAGE, null);
-                }
-                else {
+                } else {
                     SettingsWindow settingsWindow = new SettingsWindow(this, horizontal, vertical, cellSizeX, cellXizeY);
                     settingsWindow.setVisible(true);
                 }
@@ -166,10 +169,9 @@ public class GameWindow extends JFrame {
         JMenuItem fontMenuItem = new JMenuItem("Задать шрифт");
         fontMenuItem.addActionListener(e -> {
             SwingUtilities.invokeLater(() -> {
-                if(fieldPanel.isInProcess()) {
+                if (fieldPanel.isInProcess()) {
                     JOptionPane.showMessageDialog(null, "Нельзя изменить шрифт пока идет игра!", "Ошибка", JOptionPane.ERROR_MESSAGE, null);
-                }
-                else
+                } else
                     StrTransform.setFontName(JOptionPane.showInputDialog("Введите название шрифта"));
             });
         });
@@ -215,8 +217,8 @@ public class GameWindow extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Угадайка");
-        Image image = Toolkit.getDefaultToolkit().createImage( getClass().getClassLoader().getResource("icon.png") );
-        setIconImage( image );
+        Image image = Toolkit.getDefaultToolkit().createImage(getClass().getClassLoader().getResource("icon.png"));
+        setIconImage(image);
         setLocationRelativeTo(null);
     }
 
@@ -236,19 +238,16 @@ public class GameWindow extends JFrame {
 
         setSize(new Dimension(cellSizeX * horizontal + Toolkit.getDefaultToolkit().getScreenSize().height / 8, cellXizeY * vertical));
         setResizable(false);
-        if(fieldSizeChanged) {
+        if (fieldSizeChanged) {
             fieldPanel.resizeField(fieldSizeX, fieldSizeY);
         }
         fieldPanel.redraw();
     }
 
-    public FieldPanel getFieldPanel() {
-        return fieldPanel;
-    }
-
     public void startGame() {
         fieldPanel.startGame();
     }
+
     private void stopGame() {
         fieldPanel.stopGame();
     }
@@ -256,5 +255,4 @@ public class GameWindow extends JFrame {
     public void continueGame(String filename) {
         fieldPanel.continueGame(filename);
     }
-
 }

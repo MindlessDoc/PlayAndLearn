@@ -12,31 +12,35 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import ru.spb.leti.pal.Cell;
 import ru.spb.leti.pal.DictionaryPair;
 
 public class FieldPanel extends JPanel {
-
     private int rows;
     private int columns;
+    private int numberOfCorrectCells;
+
+    @Getter
+    @Setter
     private Square selected = null;
+    @Getter
     private Game game;
     private Square[][] field;
-    private int numberOfCorrectCells;
     private GameWindow window;
+
     private boolean inProcess = false;
     private boolean doubleMistake = false;
     private LinkedList<DictionaryPair> rightMistakeList;
-
-    public Game getGame() {
-        return game;
-    }
 
     public FieldPanel(GameWindow window, int rows, int columns) {
         this.window = window;
         this.rows = rows;
         this.columns = columns;
         this.game = new Game(rows, columns);
+
         init();
     }
 
@@ -56,14 +60,6 @@ public class FieldPanel extends JPanel {
 
     public boolean isSelectedExists() {
         return selected != null;
-    }
-
-    public Square getSelected() {
-        return selected;
-    }
-
-    public void setSelected(Square selected) {
-        this.selected = selected;
     }
 
     public void checkTwoSquares(Square checked) {
@@ -140,7 +136,7 @@ public class FieldPanel extends JPanel {
         }
     }
 
-    void displayField() {
+    private void displayField() {
         numberOfCorrectCells = 0;
         Cell[][] cellField = game.getField();
         if (cellField == null) {
@@ -185,6 +181,7 @@ public class FieldPanel extends JPanel {
         window.getInfoPanel().startAll();
         window.getInfoPanel().getProgress().setNumberOfSteps(game.getNumberOfSteps());
         game.nextField();
+
         displayField();
     }
 
@@ -213,9 +210,11 @@ public class FieldPanel extends JPanel {
         rightMistakeList = right;
         this.selected = null;
         this.inProcess = true;
+
         window.getInfoPanel().startAll();
         window.getInfoPanel().getProgress().setNumberOfSteps(game.getNumberOfSteps());
         game.nextField();
+
         displayField();
     }
 
@@ -235,16 +234,17 @@ public class FieldPanel extends JPanel {
     }
 
     void resizeField(int fieldSizeX, int fieldSizeY) {
-
         this.rows = fieldSizeY;
         this.columns = fieldSizeX;
         this.game = new Game(rows, columns);
+
         removeAll();
         init();
     }
 
     public void redraw() {
         removeAll();
+
         field = new Square[rows][columns];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -253,6 +253,7 @@ public class FieldPanel extends JPanel {
                 field[i][j] = square;
             }
         }
+
         displayField();
         updateUI();
     }
@@ -273,6 +274,7 @@ public class FieldPanel extends JPanel {
         inProcess = false;
         doubleMistake = false;
         rightMistakeList = null;
+
         displayField();
         init();
         updateUI();
