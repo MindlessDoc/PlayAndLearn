@@ -131,9 +131,8 @@ public class SettingsWindow extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        Image image = Toolkit.getDefaultToolkit().createImage( getClass().getResource("/UI/StartWindow/icon_settings.png") );
+        Image image = Toolkit.getDefaultToolkit().createImage(getClass()
+                .getClassLoader().getResource("icon_settings.png"));
         setIconImage( image );
     }
-
-
 }

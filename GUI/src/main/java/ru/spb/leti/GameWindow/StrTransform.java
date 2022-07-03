@@ -28,31 +28,6 @@ public class StrTransform {
         formattedWords.clear();
     }
 
-    public static String toNormalString(String inputString){
-        char[] input = inputString.toCharArray();
-        String output="";
-        char lastPushedSymb = ' ';
-        for (int i=0; i < inputString.length(); i++) {
-            if (lastPushedSymb == '\\'){
-                switch (input[i]) {
-                    case '1': case '2': case '3': case '4': case '5': case '6':
-                    case 'р': case 'о': case 'з': case 'г': case 'с': case 'ф': case 'ч': case 'е': case 'к':
-                    case '\\':
-                        // if (i != 1 && input[i+1] != '\\')
-                        //output += '';
-                        lastPushedSymb = ' ';
-                        continue;
-                }
-            }
-            if (input[i] == '\\'){
-                lastPushedSymb = input[i];
-                continue;
-            }
-            output += input[i];
-        }
-        return output;
-    }
-
     public static ArrayList<Word> formattedWords = new ArrayList<Word>();
     public static Word bufferWord;
 
@@ -251,30 +226,6 @@ public class StrTransform {
         int j=0;
 
     }*/
-
-    public static boolean isFormatCorrect(String inputString){
-        inputString += ' ';
-        char[] input = inputString.toCharArray();
-        char lastPushedSymb =' ';
-        for (int i=0; i < inputString.length(); i++) {
-            if (lastPushedSymb == '\\'){
-                switch (input[i]){
-                    case '1': case '2': case '3': case '4': case '5': case '6':
-                    case 'р': case 'о': case 'з': case 'г': case 'с': case 'ф': case 'ч': case 'е': case 'к':
-                    case '\\':
-                        lastPushedSymb = ' ';
-                        continue;
-                    default:
-                        return false;
-                }
-
-            }
-            if (input[i] == '\\'){
-                lastPushedSymb = input[i];
-            }
-        }
-        return true;
-    }
 
     public static class Word {
         int sizeMode = 0;

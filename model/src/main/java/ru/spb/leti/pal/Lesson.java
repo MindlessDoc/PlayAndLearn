@@ -9,9 +9,12 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
+import lombok.Getter;
+import lombok.Setter;
 
 public class Lesson {
-    ArrayList<DictionaryPair> Dictionary;
+    @Getter @Setter
+    ArrayList<DictionaryPair> dictionary;
     private String LessonName;
 
     /**
@@ -20,28 +23,28 @@ public class Lesson {
      * @param file - файл
      * @return - удачная инициализация - true
      */
-    boolean Init(File file) {
+    public boolean init(File file) {
         try (Scanner scanner = new Scanner(file, "UTF-8")) {
-            Dictionary = new ArrayList<>();
+            dictionary = new ArrayList<>();
             DictionaryPair pair;
             if (scanner.hasNext()) {
                 pair = DictionaryPair.read1Pair(scanner);
                 if (pair != null)
                 {
-                    if (StrTransform.isFormatCorrect(pair.getFirst()) && StrTransform.isFormatCorrect(pair.getSecond()))
-                        Dictionary.add(pair);
+                    if (isFormatCorrect(pair.getFirst()) && isFormatCorrect(pair.getSecond()))
+                        dictionary.add(pair);
                     else {
                         // Сообщение об ошибке в строке словаря ("\e")
-                        JOptionPane.showMessageDialog(null, "Неизвестная управляющая конструкция в строке №" + (Dictionary.size() + 1), "Ошибка чтения словаря", JOptionPane.ERROR_MESSAGE, null);
+                        JOptionPane.showMessageDialog(null, "Неизвестная управляющая конструкция в строке №" + (dictionary.size() + 1), "Ошибка чтения словаря", JOptionPane.ERROR_MESSAGE, null);
                         return false;
                     }
                 }
                 else
                 {
                     // Сообщение об ошибке в словаре
-                    JOptionPane.showMessageDialog(null, "Некорректная строка №" + (Dictionary.size() + 1), "Ошибка чтения словаря", JOptionPane.ERROR_MESSAGE, null);
-                    System.out.println("Ошибка в словаре. Строка №" + (Dictionary.size() + 1) + "\n");
-                    Dictionary.clear();
+                    JOptionPane.showMessageDialog(null, "Некорректная строка №" + (dictionary.size() + 1), "Ошибка чтения словаря", JOptionPane.ERROR_MESSAGE, null);
+                    System.out.println("Ошибка в словаре. Строка №" + (dictionary.size() + 1) + "\n");
+                    dictionary.clear();
                     return false;
                 }
             }
@@ -49,20 +52,20 @@ public class Lesson {
                 pair = DictionaryPair.readPair(scanner);
                 if (pair != null)
                 {
-                    if (StrTransform.isFormatCorrect(pair.getFirst()) && StrTransform.isFormatCorrect(pair.getSecond()))
-                        Dictionary.add(pair);
+                    if (isFormatCorrect(pair.getFirst()) && isFormatCorrect(pair.getSecond()))
+                        dictionary.add(pair);
                     else {
                         // Сообщение об ошибке в строке словаря ("\e")
-                        JOptionPane.showMessageDialog(null, "Неизвестная управляющая конструкция в строке №" + (Dictionary.size() + 1), "Ошибка чтения словаря", JOptionPane.ERROR_MESSAGE, null);
+                        JOptionPane.showMessageDialog(null, "Неизвестная управляющая конструкция в строке №" + (dictionary.size() + 1), "Ошибка чтения словаря", JOptionPane.ERROR_MESSAGE, null);
                         return false;
                     }
                 }
                 else
                 {
                     // Сообщение об ошибке в словаре
-                    JOptionPane.showMessageDialog(null, "Некорректная строка №" + (Dictionary.size() + 1), "Ошибка чтения словаря", JOptionPane.ERROR_MESSAGE, null);
-                    System.out.println("Ошибка в словаре. Строка №" + (Dictionary.size() + 1) + "\n");
-                    Dictionary.clear();
+                    JOptionPane.showMessageDialog(null, "Некорректная строка №" + (dictionary.size() + 1), "Ошибка чтения словаря", JOptionPane.ERROR_MESSAGE, null);
+                    System.out.println("Ошибка в словаре. Строка №" + (dictionary.size() + 1) + "\n");
+                    dictionary.clear();
                     return false;
                 }
             }
@@ -71,7 +74,7 @@ public class Lesson {
             JOptionPane.showMessageDialog(null, "Не удалось открыть файл словаря", "Ошибка открытия словаря", JOptionPane.ERROR_MESSAGE, null);
             return false;
         }
-        if (Dictionary.isEmpty())
+        if (dictionary.isEmpty())
         {
             // Сообщение о ненайденном файле
             JOptionPane.showMessageDialog(null, "Пустой словарь", "Ошибка словаря словаря", JOptionPane.ERROR_MESSAGE, null);
@@ -81,7 +84,7 @@ public class Lesson {
         return true;
     }
 
-    void setLessonName(String lessonName) {
+    public void setLessonName(String lessonName) {
         LessonName = lessonName;
     }
 
@@ -95,9 +98,33 @@ public class Lesson {
      * @param dictionary - список пар
      * @param lessonName - название урока
      */
-    void LessonFromList(LinkedList<DictionaryPair> dictionary, String lessonName) {
-        Dictionary = LinkedToArrayList(dictionary);
+    public void LessonFromList(LinkedList<DictionaryPair> dictionary, String lessonName) {
+        this.dictionary = LinkedToArrayList(dictionary);
         setLessonName(lessonName);
+    }
+
+    private boolean isFormatCorrect(String inputString){
+        inputString += ' ';
+        char[] input = inputString.toCharArray();
+        char lastPushedSymb =' ';
+        for (int i=0; i < inputString.length(); i++) {
+            if (lastPushedSymb == '\\'){
+                switch (input[i]){
+                    case '1': case '2': case '3': case '4': case '5': case '6':
+                    case 'р': case 'о': case 'з': case 'г': case 'с': case 'ф': case 'ч': case 'е': case 'к':
+                    case '\\':
+                        lastPushedSymb = ' ';
+                        continue;
+                    default:
+                        return false;
+                }
+
+            }
+            if (input[i] == '\\'){
+                lastPushedSymb = input[i];
+            }
+        }
+        return true;
     }
 
     /**
@@ -113,9 +140,9 @@ public class Lesson {
     /**
      * Перемешивание пар урока
      */
-    void MixDictionary() {
+    public void mixDictionary() {
         //Dictionary.sort((o1, o2) -> (new Random()).nextInt() % 3 - 1);
-        Collections.shuffle(Dictionary);
+        Collections.shuffle(dictionary);
     }
 
 }

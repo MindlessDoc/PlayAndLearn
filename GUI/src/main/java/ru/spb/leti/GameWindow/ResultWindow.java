@@ -19,7 +19,6 @@ import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import ru.spb.leti.pal.DictionaryPair;
-import ru.spb.leti.pal.Game;
 
 public class ResultWindow extends JFrame {
 

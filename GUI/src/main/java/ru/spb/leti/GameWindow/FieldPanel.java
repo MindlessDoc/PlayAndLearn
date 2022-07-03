@@ -14,7 +14,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import ru.spb.leti.pal.Cell;
 import ru.spb.leti.pal.DictionaryPair;
-import ru.spb.leti.pal.Game;
 
 public class FieldPanel extends JPanel {
 

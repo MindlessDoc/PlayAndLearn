@@ -1,13 +1,18 @@
 package ru.spb.leti.pal;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class Move {
+    @Getter @Setter
     Cell first;
+    @Getter @Setter
     Cell second;
 
-    Move() {
+    public Move() {
     }
 
-    Move(Cell a, Cell b) {
+    public Move(Cell a, Cell b) {
         first = a;
         second = b;
     }

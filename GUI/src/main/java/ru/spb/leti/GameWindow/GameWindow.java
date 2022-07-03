@@ -22,8 +22,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import ru.spb.leti.pal.Game;
-
 public class GameWindow extends JFrame {
 
     public InfoPanel getInfoPanel() {
@@ -217,7 +215,7 @@ public class GameWindow extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Угадайка");
-        Image image = Toolkit.getDefaultToolkit().createImage( getClass().getResource("/UI/StartWindow/icon.png") );
+        Image image = Toolkit.getDefaultToolkit().createImage( getClass().getClassLoader().getResource("icon.png") );
         setIconImage( image );
         setLocationRelativeTo(null);
     }

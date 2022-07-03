@@ -5,7 +5,7 @@ public class Cell {
     private Position position;  // координаты ячейки на поле
     private boolean flag;           // флаг для обозначения отображаемого слова
 
-    Cell(DictionaryPair pair, Position position, boolean flag) {
+    public Cell(DictionaryPair pair, Position position, boolean flag) {
         this.pair = pair;
         this.flag = flag;
         this.position = position;
@@ -19,7 +19,7 @@ public class Cell {
         return position;
     }
 
-    void setPosition(Position position) {
+    public void setPosition(Position position) {
         this.position = position;
     }
 

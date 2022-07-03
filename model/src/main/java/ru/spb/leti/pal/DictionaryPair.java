@@ -29,7 +29,7 @@ public class DictionaryPair {
             return null;
     }
 
-    static DictionaryPair readPair(Scanner scanner)
+    public static DictionaryPair readPair(Scanner scanner)
     {
         String line = scanner.nextLine();
         String[] strings = line.split("\t");

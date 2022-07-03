@@ -19,12 +19,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
+
 import ru.spb.leti.GameWindow.GameWindow;
-import ru.spb.leti.pal.Game;
+import ru.spb.leti.GameWindow.Game;
 
 
 public class StartWindow extends JFrame {
-
     public StartWindow() {
         init();
     }
@@ -203,19 +203,16 @@ public class StartWindow extends JFrame {
         setTitle("Угадайка");
         setLocationRelativeTo(null);
 
-        Image image = Toolkit.getDefaultToolkit().createImage( getClass().getResource("icon.png") );
+        Image image = Toolkit.getDefaultToolkit().createImage(getClass()
+                .getClassLoader().getResource("icon.png"));
         setIconImage( image );
     }
 
-
     public static void main(String[] args) {
-
         SwingUtilities.invokeLater(() -> {
             StartWindow startWindow = new StartWindow();
             startWindow.setVisible(true);
         });
-
-
     }
 
     public static boolean isNumeric(String str) {
