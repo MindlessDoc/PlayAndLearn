@@ -98,13 +98,20 @@ public class InfoPanel extends JPanel {
         mixButton.addActionListener(e -> getWindow().getFieldPanel().mixField());
         add(mixButton, constraints);
 
-
         constraints.gridy++;
         constraints.weighty = 0.2;
+        JButton restartButton = new JButton("Начать сначала");
+        restartButton.setFont(new Font("Arial", Font.BOLD, Toolkit.getDefaultToolkit().getScreenSize().height / 72));
+        restartButton.addActionListener(e -> getWindow().restartGame());
+        add(restartButton, constraints);//добавлено
+
+        constraints.gridy++;
+        constraints.weighty = 0.05;
         JButton startButton = new JButton("Новая игра");
         startButton.setFont(new Font("Arial", Font.BOLD, Toolkit.getDefaultToolkit().getScreenSize().height / 72));
-        startButton.addActionListener(e -> getWindow().startGame());
-        add(startButton, constraints);//добавлено
+        startButton.setPreferredSize(restartButton.getPreferredSize());
+        startButton.addActionListener(e -> getWindow().getFieldPanel().startGame());
+        add(startButton, constraints);
 
         progress.setVisible(false);
         mistakeCounter.setVisible(false);

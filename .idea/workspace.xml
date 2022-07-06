@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80dbfea1-338f-42ab-9e6c-9a1d3429da1b" name="Changes" comment="Сделал unenabled кнопку отмены хода">
-      <change afterPath="$PROJECT_DIR$/model/src/main/java/ru/spb/leti/pal/events/UndoProgressEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/FieldPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/FieldPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/GameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/GameWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/InfoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/InfoPanel.java" afterDir="false" />
     </list>
@@ -104,7 +105,7 @@
       <workItem from="1656859278870" duration="7000" />
       <workItem from="1656859513398" duration="23000" />
       <workItem from="1656859588999" duration="6784000" />
-      <workItem from="1657087301130" duration="21279000" />
+      <workItem from="1657087301130" duration="22664000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1656856901316</created>
@@ -176,7 +177,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657142657990</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Сделал unenabled кнопку отмены хода">
+      <created>1657143495819</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1657143495819</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -136,8 +136,11 @@ public class GameWindow extends JFrame {
         JMenuItem exitMenuItem = new JMenuItem("Выйти");
         exitMenuItem.addActionListener(e -> dispose());
 
+        JMenuItem restartGameMenuItem = new JMenuItem("Начать сначала");
+        restartGameMenuItem.addActionListener(e -> fieldPanel.restartGame());
+
         JMenuItem newGameMenuItem = new JMenuItem("Новая игра");
-        newGameMenuItem.addActionListener(e -> startGame());
+        newGameMenuItem.addActionListener(e -> fieldPanel.startGame());
 
         undoMenuItem = new JMenuItem("Отменить ход");
         undoMenuItem.setEnabled(false);
@@ -192,6 +195,7 @@ public class GameWindow extends JFrame {
         });
 
         gameMenu.add(newGameMenuItem);
+        gameMenu.add(restartGameMenuItem);
         gameMenu.add(loadGameMenuItem);
         gameMenu.add(saveGameMenuItem);
         gameMenu.add(settingsMenuItem);
@@ -259,8 +263,8 @@ public class GameWindow extends JFrame {
         fieldPanel.redraw();
     }
 
-    public void startGame() {
-        fieldPanel.startGame();
+    public void restartGame() {
+        fieldPanel.restartGame();
     }
 
     private void stopGame() {

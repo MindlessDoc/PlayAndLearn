@@ -48,6 +48,9 @@ public class Game {
     private boolean mixFlag;// Флаг перемешивания (при загрузке этапа)
     private boolean oddFlagForDistribution;// Флаг "плохого" размера поля (нечетная вертикаль)
 
+    @Getter
+    private File curFile;
+
     public Game(int vertical, int horizontal) {
         setSize(vertical, horizontal);
     }
@@ -83,6 +86,8 @@ public class Game {
      * @param file - файл-словарь
      */
     public boolean newLesson(File file) {
+        curFile = file;
+
         if (curLesson == null) {
             curLesson = new Lesson();
         }
@@ -93,6 +98,22 @@ public class Game {
         } else
             return false;
     }
+
+    /**
+     * Перезапуск урока из текушего файла
+     */
+    public boolean newLesson() {
+        if (curLesson == null) {
+            curLesson = new Lesson();
+        }
+        if (curLesson.init(curFile)) {
+            prepareLesson();
+            curLesson.mixDictionary();
+            return true;
+        } else
+            return false;
+    }
+
 
     /**
      * Подготовка урока к запуску

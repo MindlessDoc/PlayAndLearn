@@ -1,7 +1,6 @@
 package ru.spb.leti.GameWindow;
 
 import com.google.common.eventbus.EventBus;
-import com.google.common.eventbus.Subscribe;
 import java.awt.GridLayout;
 
 import java.io.File;
@@ -181,6 +180,18 @@ public class FieldPanel extends JPanel {
         }
 
         if (!game.newLesson(fileDialog.getSelectedFile())) {
+            return;
+        }
+
+        window.getInfoPanel().startAll();
+        window.getInfoPanel().getProgress().setNumberOfSteps(game.getNumberOfSteps());
+        game.nextField();
+
+        displayField();
+    }
+
+    public void restartGame() {
+        if (!game.newLesson()) {
             return;
         }
 
