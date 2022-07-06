@@ -1,5 +1,6 @@
 package ru.spb.leti.GameWindow;
 
+import com.google.common.eventbus.EventBus;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
@@ -15,6 +16,7 @@ import lombok.Getter;
 
 import ru.spb.leti.pal.Cell;
 import ru.spb.leti.pal.Position;
+import ru.spb.leti.pal.events.ProgressDoneEvent;
 
 public class Square extends JButton {
     private boolean pressed;
@@ -30,8 +32,11 @@ public class Square extends JButton {
     @Getter
     private Cell cell = null;
 
-    public Square(FieldPanel parent, Cell cell) {
+    private final EventBus eventBus;
+
+    public Square(FieldPanel parent, Cell cell, EventBus eventBus) {
         this.parent = parent;
+        this.eventBus = eventBus;
 
         init();
     }
@@ -137,12 +142,16 @@ public class Square extends JButton {
         removeAll();
         setBackground(new Color(34, 139, 34));
         setText("");
+        cell.setDisplayedWord("");
+        eventBus.post(new ProgressDoneEvent());
     }
 
     void setWrong() {
         setBackground(Color.RED);
         wrong = true;
         selected = false;
+        eventBus.post(new ProgressDoneEvent());
+
         timer = new Timer(1000, e -> setNormal());
         timer.start();
     }

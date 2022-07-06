@@ -1,5 +1,7 @@
 package ru.spb.leti.GameWindow;
 
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 import java.awt.GridLayout;
 
 import java.io.File;
@@ -35,11 +37,14 @@ public class FieldPanel extends JPanel {
     private boolean doubleMistake = false;
     private LinkedList<DictionaryPair> rightMistakeList;
 
-    public FieldPanel(GameWindow window, int rows, int columns) {
+    private final EventBus eventBus;
+
+    public FieldPanel(GameWindow window, int rows, int columns, EventBus eventBus) {
         this.window = window;
         this.rows = rows;
         this.columns = columns;
         this.game = new Game(rows, columns);
+        this.eventBus = eventBus;
 
         init();
     }
@@ -51,7 +56,7 @@ public class FieldPanel extends JPanel {
         field = new Square[rows][columns];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                Square square = new Square(this, null);
+                Square square = new Square(this, null, eventBus);
                 add(square);
                 field[i][j] = square;
             }
@@ -248,7 +253,7 @@ public class FieldPanel extends JPanel {
         field = new Square[rows][columns];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                Square square = new Square(this, null);
+                Square square = new Square(this, null, eventBus);
                 add(square);
                 field[i][j] = square;
             }

@@ -1,5 +1,8 @@
 package ru.spb.leti.GameWindow;
 
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
+
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -11,6 +14,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 import lombok.Getter;
+
+import ru.spb.leti.pal.events.ProgressDoneEvent;
 
 public class InfoPanel extends JPanel {
     @Getter
@@ -24,12 +29,17 @@ public class InfoPanel extends JPanel {
     private JCheckBox mixCheckBox;
     private JButton undoButton;
 
+    private final EventBus eventBus;
+
     public JCheckBox getMixCheckBox() {
         return mixCheckBox;
     }
 
-    public InfoPanel(GameWindow window) {
+    public InfoPanel(GameWindow window, EventBus eventBus) {
         this.window = window;
+        this.eventBus = eventBus;
+
+        eventBus.register(this);
 
         GridBagLayout layout = new GridBagLayout();
         GridBagConstraints constraints = new GridBagConstraints();
@@ -109,6 +119,12 @@ public class InfoPanel extends JPanel {
     }
 
     private void undo() {
+        undoButton.setEnabled(false);
         window.getFieldPanel().undo();
+    }
+
+    @Subscribe
+    private void progressDone(ProgressDoneEvent event) {
+        undoButton.setEnabled(true);
     }
 }

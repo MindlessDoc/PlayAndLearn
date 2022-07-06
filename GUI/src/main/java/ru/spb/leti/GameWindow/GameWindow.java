@@ -1,5 +1,6 @@
 package ru.spb.leti.GameWindow;
 
+import com.google.common.eventbus.EventBus;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -33,6 +34,8 @@ public class GameWindow extends JFrame {
     private int horizontal;
     private int cellSizeX;
     private int cellXizeY;
+
+    private final EventBus eventBus = new EventBus();
 
     public InfoPanel getInfoPanel() {
         return infoPanel;
@@ -205,12 +208,12 @@ public class GameWindow extends JFrame {
         gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 0.1;
-        FieldPanel fieldPanel = new FieldPanel(this, vertical, horizontal);
+        FieldPanel fieldPanel = new FieldPanel(this, vertical, horizontal, eventBus);
         this.fieldPanel = fieldPanel;
         panel.add(fieldPanel, gridBagConstraints);
         gridBagConstraints.gridx = 1;
         gridBagConstraints.weightx = 0;
-        InfoPanel infoPanel = new InfoPanel(this);
+        InfoPanel infoPanel = new InfoPanel(this, eventBus);
         this.infoPanel = infoPanel;
         panel.add(infoPanel, gridBagConstraints);
         setContentPane(panel);
