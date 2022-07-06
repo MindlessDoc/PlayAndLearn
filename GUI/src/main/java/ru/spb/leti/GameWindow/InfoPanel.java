@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import lombok.Getter;
 
 import ru.spb.leti.pal.events.ProgressDoneEvent;
+import ru.spb.leti.pal.events.UndoProgressEvent;
 
 public class InfoPanel extends JPanel {
     @Getter
@@ -120,12 +121,16 @@ public class InfoPanel extends JPanel {
     }
 
     private void undo() {
-        undoButton.setEnabled(false);
         window.getFieldPanel().undo();
     }
 
     @Subscribe
     private void progressDone(ProgressDoneEvent event) {
         undoButton.setEnabled(true);
+    }
+
+    @Subscribe
+    private void progressUndo(UndoProgressEvent event) {
+        undoButton.setEnabled(false);
     }
 }

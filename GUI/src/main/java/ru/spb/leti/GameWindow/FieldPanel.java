@@ -19,6 +19,7 @@ import lombok.Setter;
 
 import ru.spb.leti.pal.Cell;
 import ru.spb.leti.pal.DictionaryPair;
+import ru.spb.leti.pal.events.UndoProgressEvent;
 
 public class FieldPanel extends JPanel {
     private int rows;
@@ -225,6 +226,7 @@ public class FieldPanel extends JPanel {
 
 
     public void undo() {
+        eventBus.post(new UndoProgressEvent());
         int numberBefore = game.getNumMistakes();
         game.undo();
         if (game.getNumMistakes() < numberBefore) {

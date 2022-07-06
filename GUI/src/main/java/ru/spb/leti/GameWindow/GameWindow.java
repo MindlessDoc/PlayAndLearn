@@ -1,6 +1,7 @@
 package ru.spb.leti.GameWindow;
 
 import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -25,6 +26,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import lombok.Getter;
 
+import ru.spb.leti.pal.events.ProgressDoneEvent;
+import ru.spb.leti.pal.events.UndoProgressEvent;
+
 public class GameWindow extends JFrame {
     @Getter
     private FieldPanel fieldPanel;
@@ -34,6 +38,8 @@ public class GameWindow extends JFrame {
     private int horizontal;
     private int cellSizeX;
     private int cellXizeY;
+
+    private JMenuItem undoMenuItem;
 
     private final EventBus eventBus = new EventBus();
 
@@ -46,6 +52,8 @@ public class GameWindow extends JFrame {
         this.horizontal = horizontal;
         this.cellSizeX = cellSizeX;
         this.cellXizeY = cellSizeY;
+
+        eventBus.register(this);
 
         init();
         setMenuBars();
@@ -131,8 +139,11 @@ public class GameWindow extends JFrame {
         JMenuItem newGameMenuItem = new JMenuItem("Новая игра");
         newGameMenuItem.addActionListener(e -> startGame());
 
-        JMenuItem undoMenuItem = new JMenuItem("Отменить ход");
-        undoMenuItem.addActionListener(e -> fieldPanel.undo());
+        undoMenuItem = new JMenuItem("Отменить ход");
+        undoMenuItem.setEnabled(false);
+        undoMenuItem.addActionListener(e -> {
+            fieldPanel.undo();
+        });
 
         JMenuItem mixMenuItem = new JMenuItem("Перемешать");
         mixMenuItem.addActionListener(e -> fieldPanel.mixField());
@@ -258,5 +269,15 @@ public class GameWindow extends JFrame {
 
     public void continueGame(String filename) {
         fieldPanel.continueGame(filename);
+    }
+
+    @Subscribe
+    private void progressDone(ProgressDoneEvent event) {
+        undoMenuItem.setEnabled(true);
+    }
+
+    @Subscribe
+    private void progressUndo(UndoProgressEvent event) {
+        undoMenuItem.setEnabled(false);
     }
 }
