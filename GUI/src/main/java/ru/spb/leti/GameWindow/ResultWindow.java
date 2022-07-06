@@ -139,7 +139,7 @@ public class ResultWindow extends JFrame {
 
     private int displayChooseWindow() {
         Object[] options = {"Левый список", "Правый список", "Оба списка сразу", "Оба списка по очереди"};
-        String ret = (String) JOptionPane.showInputDialog(panel.getWindow(), "Какой список ошибок запускать?", "Выбор", JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        String ret = (String) JOptionPane.showInputDialog(panel.getWindow(), "Какой список ошибок запускать?", "Выбор", JOptionPane.PLAIN_MESSAGE, null, options, options[2]);
         return Arrays.asList(options).indexOf(ret);
     }
 }

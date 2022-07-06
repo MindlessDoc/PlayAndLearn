@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80dbfea1-338f-42ab-9e6c-9a1d3429da1b" name="Changes" comment="Рефакторинг класса StrTransform + реализация копирования по колесу мышки">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/Square.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/StrTransform.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/StrTransform.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/src/main/java/ru/spb/leti/pal/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/src/main/java/ru/spb/leti/pal/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/target/classes/ru/spb/leti/pal/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/model/target/classes/ru/spb/leti/pal/Cell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/ResultWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/ResultWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +26,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -104,7 +101,7 @@
       <workItem from="1656859278870" duration="7000" />
       <workItem from="1656859513398" duration="23000" />
       <workItem from="1656859588999" duration="6784000" />
-      <workItem from="1657087301130" duration="18814000" />
+      <workItem from="1657087301130" duration="19227000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1656856901316</created>
@@ -148,7 +145,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657139951349</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Рефакторинг класса StrTransform + реализация копирования по колесу мышки">
+      <created>1657140955690</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1657140955690</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -198,17 +202,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/StrTransform.java</url>
-          <line>45</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/StrTransform.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/StrTransform.java</url>
-          <line>74</line>
+          <line>76</line>
           <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
