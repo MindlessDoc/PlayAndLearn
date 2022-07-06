@@ -229,7 +229,7 @@ public class Game {
             }
         } else {
             localMistakes++;
-            if (first.isFlag()) {
+            if (first.isRight()) {
                 lessonMistakes1.addLast(second.getPair());
                 lessonMistakes2.addLast(first.getPair());
             } else {
@@ -254,7 +254,7 @@ public class Game {
         String secondStr;
         boolean flag1 = false;
         boolean flag2 = false;
-        if (first.isFlag()) {
+        if (first.isRight()) {
             // Если первая ячейка отображает правое слово
             firstStr = toNormalString(first.getPair().getSecond());
             secondStr = toNormalString(second.getPair().getFirst());
@@ -424,7 +424,7 @@ public class Game {
             {
                 for (Cell a : arr) {
                     if (a != null) { // Индекс пары в словаре + флаг
-                        if (a.isFlag())
+                        if (a.isRight())
                             save.write(curLesson.getDictionary().indexOf(a.getPair()) + " 1 ");
                         else
                             save.write(curLesson.getDictionary().indexOf(a.getPair()) + " 0 ");
@@ -459,13 +459,13 @@ public class Game {
     private void SaveLastMove(Writer save) throws IOException {
         if (lastMove != null) {
             Cell cell = lastMove.getFirst();
-            if (cell.isFlag())
+            if (cell.isRight())
                 save.write(curLesson.getDictionary().indexOf(cell.getPair()) + " 1 ");
             else
                 save.write(curLesson.getDictionary().indexOf(cell.getPair()) + " 0 ");
             save.write(cell.getPosition().toString() + " ");
             cell = lastMove.getSecond();
-            if (cell.isFlag())
+            if (cell.isRight())
                 save.write(curLesson.getDictionary().indexOf(cell.getPair()) + " 1 ");
             else
                 save.write(curLesson.getDictionary().indexOf(cell.getPair()) + " 0 ");

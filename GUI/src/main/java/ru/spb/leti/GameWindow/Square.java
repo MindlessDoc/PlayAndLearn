@@ -1,11 +1,14 @@
 package ru.spb.leti.GameWindow;
 
 import java.awt.Color;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 import lombok.Getter;
@@ -24,36 +27,38 @@ public class Square extends JButton {
     @Getter
     private Position position;
     private Timer timer;
+    @Getter
     private Cell cell = null;
 
     public Square(FieldPanel parent, Cell cell) {
         this.parent = parent;
-        setCell(cell);
+
         init();
     }
 
     public void setCell(Cell cell) {
-        this.cell = cell;
+        this.selected = false;
+        this.pressed = false;
+
         this.removeAll();
         if(cell != null) {
+            this.cell = cell;
             this.position = cell.getPosition();
-            if(cell.isFlag()) {
-                this.type = SquareType.RIGHT;
-                StrTransform.transform(this, cell.getPair().getSecond(), (int)(getHeight() * 0.9));
-            } else {
-                this.type = SquareType.LEFT;
-                StrTransform.transform(this, cell.getPair().getFirst(), getHeight());
-            }
+            this.type = cell.isRight() ? SquareType.RIGHT : SquareType.LEFT;
 
+            //Без понятия зачем нужен этот множитель
+            //TODO попробовать выяснить и убрать
+            double multiplier = cell.isRight() ? 0.9 : 1;
+            StrTransform.transform(this, cell.getDisplayedWord(), (int)(getHeight() * multiplier));
         } else {
             this.type = SquareType.FINAL;
         }
-        this.selected = false;
-        this.pressed = false;
+
         redraw();
     }
 
     void redraw() {
+        //TODO убрать захаркоженные цвета
         removeAll();
         if(type == SquareType.FINAL) {
             setBackground(new Color(34, 139, 34));
@@ -70,37 +75,25 @@ public class Square extends JButton {
     }
 
     private void init() {
+        setCell(cell);
+
         setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2));
-        addMouseListener(new MouseListener() {
+
+        addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
+                if (SwingUtilities.isMiddleMouseButton(e)) {
+                    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(
+                            new StringSelection(cell.getDisplayedWord()), null);
+                }
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                if(e.getX() < 0 || e.getY() < 0 || e.getX() > getSize().width || e.getY() > getSize().height) {
-                    return;
+                if(!(e.getX() < 0 || e.getY() < 0 || e.getX() > getSize().width
+                        || e.getY() > getSize().height || type == SquareType.FINAL || wrong)) {
+                    clicked();
                 }
-                if (type == SquareType.FINAL || wrong) {
-                    return;
-                }
-                clicked();
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2));
             }
         });
     }
@@ -164,7 +157,7 @@ public class Square extends JButton {
         }
     }
 
-    private enum SquareType{
+    private enum SquareType {
         LEFT,
         RIGHT,
         FINAL

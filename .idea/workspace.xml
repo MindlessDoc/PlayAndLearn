@@ -4,22 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80dbfea1-338f-42ab-9e6c-9a1d3429da1b" name="Changes" comment="Подправил модуль GUI, добился запускаемости игры">
+    <list default="true" id="80dbfea1-338f-42ab-9e6c-9a1d3429da1b" name="Changes" comment="Рефакторинг класса StrTransform + реализация копирования по колесу мышки">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/FieldPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/FieldPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/GameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/GameWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/InfoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/InfoPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/InfoProgress.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/InfoProgress.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/InfoTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/InfoTimer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/ResultWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/ResultWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/SettingsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/SettingsWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/Square.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/StrTransform.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/StrTransform.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/StartWindow/StartWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/StartWindow/StartWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/src/main/java/ru/spb/leti/pal/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/src/main/java/ru/spb/leti/pal/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/src/main/java/ru/spb/leti/pal/DictionaryPair.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/src/main/java/ru/spb/leti/pal/DictionaryPair.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/src/main/java/ru/spb/leti/pal/Lesson.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/src/main/java/ru/spb/leti/pal/Lesson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/target/classes/ru/spb/leti/pal/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/model/target/classes/ru/spb/leti/pal/Cell.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,11 +51,15 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../game1.1" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.35632184" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -109,7 +103,8 @@
       <workItem from="1656859214842" duration="52000" />
       <workItem from="1656859278870" duration="7000" />
       <workItem from="1656859513398" duration="23000" />
-      <workItem from="1656859588999" duration="4591000" />
+      <workItem from="1656859588999" duration="6784000" />
+      <workItem from="1657087301130" duration="18814000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1656856901316</created>
@@ -125,7 +120,35 @@
       <option name="project" value="LOCAL" />
       <updated>1656861994301</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Поверхостный рефакторинг с использованием lombok">
+      <created>1656864253140</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1656864253140</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Рефакторинг класса StrTransform + реализация копирования по колесу мышки">
+      <created>1657120105458</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1657120105458</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Рефакторинг класса StrTransform + реализация копирования по колесу мышки">
+      <created>1657139287504</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1657139287504</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Рефакторинг класса StrTransform + реализация копирования по колесу мышки">
+      <created>1657139951349</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1657139951349</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -157,7 +180,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
     <MESSAGE value="Подправил модуль GUI, добился запускаемости игры" />
-    <option name="LAST_COMMIT_MESSAGE" value="Подправил модуль GUI, добился запускаемости игры" />
+    <MESSAGE value="Поверхостный рефакторинг с использованием lombok" />
+    <MESSAGE value="Рефакторинг класса StrTransform + реализация копирования по колесу мышки" />
+    <option name="LAST_COMMIT_MESSAGE" value="Рефакторинг класса StrTransform + реализация копирования по колесу мышки" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -167,34 +192,24 @@
           <option name="timeStamp" value="1" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/StartWindow/StartWindow.java</url>
-          <line>37</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/StartWindow/StartWindow.java</url>
-          <line>205</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/SettingsWindow.java</url>
           <line>130</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/StartWindow/StartWindow.java</url>
-          <line>169</line>
-          <option name="timeStamp" value="6" />
+          <url>file://$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/StrTransform.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/StartWindow/StartWindow.java</url>
-          <line>170</line>
-          <option name="timeStamp" value="7" />
+          <url>file://$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/StrTransform.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/GameWindow.java</url>
-          <line>199</line>
-          <option name="timeStamp" value="8" />
+          <url>file://$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/StrTransform.java</url>
+          <line>74</line>
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
