@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.swing.JLabel;
 
+import javax.swing.SwingConstants;
 import lombok.Setter;
 
 public class StrTransform {
@@ -59,7 +60,6 @@ public class StrTransform {
     }
 
     public static String toFormattedString(Square button, String inputString) {
-        //TODO сделать поддержку нескольких цветов
         curColor = defColor;
         bufferWord = new Word();
         StringBuffer stringBuffer = new StringBuffer();
@@ -81,16 +81,15 @@ public class StrTransform {
     }
 
     private static void createButtons(Square button) {
-        for (Word word : formattedWords) {
-            button.removeAll();
-            JLabel label = new JLabel(word.viewText);
-            label.setFont(new Font(fontName, Font.PLAIN, (int) ((double) word.sizeMode / 6 * height)));
-            button.add(label);
-        }
+        button.removeAll();
+        JLabel label = new JLabel(bufferWord.viewText);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setFont(new Font(fontName, Font.PLAIN, (int) ((double) bufferWord.sizeMode / 6 * height)));
+        button.add(label);
     }
 
     public static class Word {
-        private int sizeMode = 0;
+        private int sizeMode = 6;
         private String text = "";
         private String viewText = "<html>";
 
