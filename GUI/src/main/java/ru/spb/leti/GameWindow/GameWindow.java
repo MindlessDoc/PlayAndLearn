@@ -243,15 +243,12 @@ public class GameWindow extends JFrame {
 
     void resize(int fieldSizeX, int fieldSizeY, int cellSizeX, int cellSizeY) {
         boolean fieldSizeChanged = (vertical != fieldSizeY || horizontal != fieldSizeX);
-//        if(fieldPanel.isInProcess() && fieldSizeChanged) {
-//            JOptionPane.showMessageDialog(null, "Нельзя изменить параметры размер поля пока идет игра!", "Ошибка", JOptionPane.ERROR_MESSAGE, null);
-//            return;
-//        }
 
         this.vertical = fieldSizeY;
         this.horizontal = fieldSizeX;
         this.cellSizeX = cellSizeX;
         this.cellXizeY = cellSizeY;
+
         setResizable(true);
         setMinimumSize(new Dimension(cellSizeX * horizontal + Toolkit.getDefaultToolkit().getScreenSize().height / 8, cellXizeY * vertical));
 

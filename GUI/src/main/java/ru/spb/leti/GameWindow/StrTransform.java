@@ -96,14 +96,14 @@ public class StrTransform {
         private static Map<Character, Color> colors = new HashMap<>();
 
         static {
-            colors.put('р', Color.PINK);
-            colors.put('о', Color.ORANGE);
+            colors.put('р', new Color(252, 15, 192));
+            colors.put('о', new Color(255, 104, 0));
             colors.put('з', Color.GREEN);
             colors.put('г', new Color(0, 184, 217));
             colors.put('с', Color.BLUE);
-            colors.put('ф', Color.MAGENTA);
-            colors.put('е', Color.LIGHT_GRAY);
-            colors.put('к', Color.RED);
+            colors.put('ф', new Color(148, 0, 211));
+            colors.put('е', new Color(138, 138, 138));
+            colors.put('к', new Color(138, 0, 0));
             colors.put('ч', Color.BLACK);
         }
     }

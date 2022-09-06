@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80dbfea1-338f-42ab-9e6c-9a1d3429da1b" name="Changes" comment="Сделал unenabled кнопку отмены хода">
+    <list default="true" id="80dbfea1-338f-42ab-9e6c-9a1d3429da1b" name="Changes" comment="Исправил ошибку из-за которой могли не отображаться слова">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/FieldPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/FieldPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/GameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/GameWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/StrTransform.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/StrTransform.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,7 +29,6 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -104,6 +105,8 @@
       <workItem from="1656859513398" duration="23000" />
       <workItem from="1656859588999" duration="6784000" />
       <workItem from="1657087301130" duration="22664000" />
+      <workItem from="1657354692560" duration="9000" />
+      <workItem from="1662491261932" duration="1071000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1656856901316</created>
@@ -182,7 +185,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657143495819</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Исправил ошибку из-за которой могли не отображаться слова">
+      <created>1657222477521</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1657222477522</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -199,13 +209,28 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/master" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>
                 </map>
               </option>
             </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="master" />
+                </option>
+              </RecentGroup>
+            </list>
           </value>
         </entry>
       </map>
@@ -218,7 +243,8 @@
     <MESSAGE value="Рефакторинг класса StrTransform + реализация копирования по колесу мышки" />
     <MESSAGE value="&quot;Оба списка сразу&quot; по умолчанию при ошибках" />
     <MESSAGE value="Сделал unenabled кнопку отмены хода" />
-    <option name="LAST_COMMIT_MESSAGE" value="Сделал unenabled кнопку отмены хода" />
+    <MESSAGE value="Исправил ошибку из-за которой могли не отображаться слова" />
+    <option name="LAST_COMMIT_MESSAGE" value="Исправил ошибку из-за которой могли не отображаться слова" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -228,18 +254,13 @@
           <option name="timeStamp" value="1" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/SettingsWindow.java</url>
-          <line>130</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/StrTransform.java</url>
-          <line>75</line>
+          <line>76</line>
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/StrTransform.java</url>
-          <line>61</line>
+          <line>62</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
       </breakpoints>
