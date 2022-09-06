@@ -155,6 +155,7 @@ public class FieldPanel extends JPanel {
                 field[i][j].setCell(cellField[i][j]);
             }
         }
+
     }
 
     public void mixField() {

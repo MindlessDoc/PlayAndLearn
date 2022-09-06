@@ -26,6 +26,7 @@ import ru.spb.leti.GameWindow.Game;
 
 public class StartWindow extends JFrame {
     public StartWindow() {
+        //System.setProperty("sun.java2d.uiScale","10");
         init();
     }
 
@@ -142,18 +143,17 @@ public class StartWindow extends JFrame {
         panel.add(exitButton);
 
         setResizable(false);
-        //panel.add(new JFormattedTextField());
         add(panel);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         //Для стартового окна используем 1/3 высоты экрана и 1/6 ширины, минимальный размер 300х100
 
-        //setMinimumSize(new Dimension(300, 100)); //минимальный размер окна
-        setSize(new Dimension(screenSize.width / 5, screenSize.height / 3));
-        setPreferredSize(new Dimension(screenSize.width / 5, screenSize.height / 3));
-        setMinimumSize(new Dimension(screenSize.width / 5, screenSize.height / 3));
-        setMaximumSize(new Dimension(screenSize.width / 5, screenSize.height / 3));
+        Dimension dimension = new Dimension(screenSize.width / 5, screenSize.height / 3);
+        setSize(dimension);
+        setPreferredSize(dimension);
+        setMinimumSize(dimension);
+        setMaximumSize(dimension);
 
         startButton.addActionListener(e -> {
             if (isNumeric(tableSizeFieldX.getText()) &&  isNumeric(tableSizeFieldY.getText())) {

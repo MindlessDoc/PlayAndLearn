@@ -2,9 +2,9 @@ package ru.spb.leti.GameWindow;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
+
+import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.InputEvent;
@@ -36,6 +36,9 @@ public class GameWindow extends JFrame {
 
     private int vertical;
     private int horizontal;
+    private int realWidth;
+    private int realHeight;
+
     private int cellSizeX;
     private int cellXizeY;
 
@@ -52,6 +55,9 @@ public class GameWindow extends JFrame {
         this.horizontal = horizontal;
         this.cellSizeX = cellSizeX;
         this.cellXizeY = cellSizeY;
+
+        this.realWidth = cellSizeX * horizontal + Toolkit.getDefaultToolkit().getScreenSize().height / 8;
+        this.realHeight = cellXizeY * vertical;
 
         eventBus.register(this);
 
@@ -217,22 +223,16 @@ public class GameWindow extends JFrame {
 
     private void init() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridBagLayout());
-        GridBagConstraints gridBagConstraints = new GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.fill = GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 0.1;
-        FieldPanel fieldPanel = new FieldPanel(this, vertical, horizontal, eventBus);
-        this.fieldPanel = fieldPanel;
-        panel.add(fieldPanel, gridBagConstraints);
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.weightx = 0;
-        InfoPanel infoPanel = new InfoPanel(this, eventBus);
-        this.infoPanel = infoPanel;
-        panel.add(infoPanel, gridBagConstraints);
+        panel.setLayout(new BorderLayout());
+
+        fieldPanel = new FieldPanel(this, vertical, horizontal, eventBus);
+        panel.add(fieldPanel, BorderLayout.CENTER);
+
+        infoPanel = new InfoPanel(this, eventBus);
+        panel.add(infoPanel, BorderLayout.EAST);
+
         setContentPane(panel);
-        setMinimumSize(new Dimension(cellSizeX * horizontal + Toolkit.getDefaultToolkit().getScreenSize().height / 8, cellXizeY * vertical));
+        setMinimumSize(new Dimension(realWidth, realHeight));
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Угадайка");
@@ -249,10 +249,13 @@ public class GameWindow extends JFrame {
         this.cellSizeX = cellSizeX;
         this.cellXizeY = cellSizeY;
 
-        setResizable(true);
-        setMinimumSize(new Dimension(cellSizeX * horizontal + Toolkit.getDefaultToolkit().getScreenSize().height / 8, cellXizeY * vertical));
+        this.realWidth = cellSizeX * horizontal + Toolkit.getDefaultToolkit().getScreenSize().height / 8;
+        this.realHeight = cellXizeY * vertical;
 
-        setSize(new Dimension(cellSizeX * horizontal + Toolkit.getDefaultToolkit().getScreenSize().height / 8, cellXizeY * vertical));
+        setResizable(true);
+        setMinimumSize(new Dimension(realWidth, realHeight));
+
+        setSize(new Dimension(realWidth, realHeight));
         setResizable(false);
         if (fieldSizeChanged) {
             fieldPanel.resizeField(fieldSizeX, fieldSizeY);

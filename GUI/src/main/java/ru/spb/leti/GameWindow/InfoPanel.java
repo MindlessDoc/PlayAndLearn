@@ -30,6 +30,8 @@ public class InfoPanel extends JPanel {
     private JCheckBox mixCheckBox;
     private JButton undoButton;
 
+    private final int fontSize = Toolkit.getDefaultToolkit().getScreenSize().height / 72;
+
     private final EventBus eventBus;
 
     public JCheckBox getMixCheckBox() {
@@ -94,21 +96,21 @@ public class InfoPanel extends JPanel {
         constraints.gridy++;
         constraints.weighty = 0;
         JButton mixButton = new JButton("Перемешать");
-        mixButton.setFont(new Font("Arial", Font.BOLD, Toolkit.getDefaultToolkit().getScreenSize().height / 72));
+        mixButton.setFont(new Font("Arial", Font.BOLD, fontSize));
         mixButton.addActionListener(e -> getWindow().getFieldPanel().mixField());
         add(mixButton, constraints);
 
         constraints.gridy++;
         constraints.weighty = 0.2;
         JButton restartButton = new JButton("Начать сначала");
-        restartButton.setFont(new Font("Arial", Font.BOLD, Toolkit.getDefaultToolkit().getScreenSize().height / 72));
+        restartButton.setFont(new Font("Arial", Font.BOLD, fontSize));
         restartButton.addActionListener(e -> getWindow().restartGame());
         add(restartButton, constraints);//добавлено
 
         constraints.gridy++;
         constraints.weighty = 0.05;
         JButton startButton = new JButton("Новая игра");
-        startButton.setFont(new Font("Arial", Font.BOLD, Toolkit.getDefaultToolkit().getScreenSize().height / 72));
+        startButton.setFont(new Font("Arial", Font.BOLD, fontSize));
         startButton.setPreferredSize(restartButton.getPreferredSize());
         startButton.addActionListener(e -> getWindow().getFieldPanel().startGame());
         add(startButton, constraints);
