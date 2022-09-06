@@ -87,7 +87,7 @@ public class Square extends JButton {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (SwingUtilities.isMiddleMouseButton(e)) {
+                if (SwingUtilities.isMiddleMouseButton(e) && cell != null) {
                     Toolkit.getDefaultToolkit().getSystemClipboard().setContents(
                             new StringSelection(cell.getDisplayedWord()), null);
                 }
@@ -96,7 +96,7 @@ public class Square extends JButton {
             @Override
             public void mouseReleased(MouseEvent e) {
                 if(!(e.getX() < 0 || e.getY() < 0 || e.getX() > getSize().width
-                        || e.getY() > getSize().height || type == SquareType.FINAL || wrong)) {
+                        || e.getY() > getSize().height || type == SquareType.FINAL || wrong) && !SwingUtilities.isMiddleMouseButton(e)) {
                     clicked();
                 }
             }
