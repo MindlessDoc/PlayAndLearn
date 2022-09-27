@@ -142,6 +142,7 @@ public class FieldPanel extends JPanel {
     }
 
     private void displayField() {
+        window.resetSettings();
         numberOfCorrectCells = 0;
         Cell[][] cellField = game.getField();
         if (cellField == null) {
@@ -184,6 +185,10 @@ public class FieldPanel extends JPanel {
             return;
         }
 
+        starting();
+    }
+
+    private void starting() {
         window.getInfoPanel().startAll();
         window.getInfoPanel().getProgress().setNumberOfSteps(game.getNumberOfSteps());
         game.nextField();
@@ -196,11 +201,7 @@ public class FieldPanel extends JPanel {
             return;
         }
 
-        window.getInfoPanel().startAll();
-        window.getInfoPanel().getProgress().setNumberOfSteps(game.getNumberOfSteps());
-        game.nextField();
-
-        displayField();
+        starting();
     }
 
     public void continueGame(String filename) {

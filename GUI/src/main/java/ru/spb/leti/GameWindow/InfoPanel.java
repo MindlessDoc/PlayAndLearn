@@ -121,6 +121,7 @@ public class InfoPanel extends JPanel {
     }
 
     public void startAll() {
+        undoButton.setEnabled(false);
         undoButton.setVisible(true);
         progress.setVisible(true);
         progress.setCurrentStep(1);
@@ -131,6 +132,10 @@ public class InfoPanel extends JPanel {
 
     private void undo() {
         window.getFieldPanel().undo();
+    }
+
+    public void resetSettings() {
+        undoButton.setEnabled(false);
     }
 
     @Subscribe

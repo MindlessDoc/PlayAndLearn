@@ -33,6 +33,7 @@ public class GameWindow extends JFrame {
     @Getter
     private FieldPanel fieldPanel;
     private InfoPanel infoPanel;
+    private JMenu gameMenu;
 
     private int vertical;
     private int horizontal;
@@ -69,7 +70,7 @@ public class GameWindow extends JFrame {
         System.setProperty("file.encoding", "UTF-8");
         JMenuBar menuBar = new JMenuBar();
         JMenu infoMenu = new JMenu("Справка");
-        JMenu gameMenu = new JMenu("Игра");
+        gameMenu = new JMenu("Игра");
         JMenuItem loadGameMenuItem = new JMenuItem("Продолжить игру");
         loadGameMenuItem.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser(System.getProperty("user.dir"));
@@ -267,7 +268,13 @@ public class GameWindow extends JFrame {
         fieldPanel.restartGame();
     }
 
+    public void resetSettings() {
+        undoMenuItem.setEnabled(false);
+        getInfoPanel().resetSettings();
+    }
+
     private void stopGame() {
+        resetSettings();
         fieldPanel.stopGame();
     }
 
