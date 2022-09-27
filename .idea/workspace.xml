@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80dbfea1-338f-42ab-9e6c-9a1d3429da1b" name="Changes" comment="Поменял менеджер расположения, чтобы надписи на кнопках в InfoPanel не обрезались + небольшие правки по коду">
+    <list default="true" id="80dbfea1-338f-42ab-9e6c-9a1d3429da1b" name="Changes" comment="Игнор системного масштабирвоания">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/Square.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/StartWindow/StartWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/StartWindow/StartWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +54,7 @@
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.35632184" />
@@ -69,6 +71,8 @@
   </component>
   <component name="RunManager">
     <configuration name="StartWindow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="ru.spb.leti.StartWindow.StartWindow" />
       <module name="GUI" />
       <extension name="coverage">
@@ -258,7 +262,8 @@
     <MESSAGE value="Исправил ошибку из-за которой могли не отображаться слова" />
     <MESSAGE value="Вернул старые цвета" />
     <MESSAGE value="Поменял менеджер расположения, чтобы надписи на кнопках в InfoPanel не обрезались + небольшие правки по коду" />
-    <option name="LAST_COMMIT_MESSAGE" value="Поменял менеджер расположения, чтобы надписи на кнопках в InfoPanel не обрезались + небольшие правки по коду" />
+    <MESSAGE value="Игнор системного масштабирвоания" />
+    <option name="LAST_COMMIT_MESSAGE" value="Игнор системного масштабирвоания" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -267,6 +272,11 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$PROJECT_DIR$/../../../../Program Files/Java/jdk-17.0.1/lib/src.zip!/java.base/java/util/Properties.java</url>
+          <line>1300</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

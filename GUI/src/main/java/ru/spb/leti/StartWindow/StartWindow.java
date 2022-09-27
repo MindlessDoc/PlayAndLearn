@@ -26,7 +26,6 @@ import ru.spb.leti.GameWindow.Game;
 
 public class StartWindow extends JFrame {
     public StartWindow() {
-        //System.setProperty("sun.java2d.uiScale","10");
         init();
     }
 
@@ -209,6 +208,7 @@ public class StartWindow extends JFrame {
     }
 
     public static void main(String[] args) {
+        System.setProperty("sun.java2d.uiScale", "1.0");
         SwingUtilities.invokeLater(() -> {
             StartWindow startWindow = new StartWindow();
             startWindow.setVisible(true);
