@@ -268,13 +268,13 @@ public class GameWindow extends JFrame {
         fieldPanel.restartGame();
     }
 
-    public void resetSettings() {
+    public void resetProgress() {
         undoMenuItem.setEnabled(false);
-        getInfoPanel().resetSettings();
+        getInfoPanel().resetProgress();
     }
 
     private void stopGame() {
-        resetSettings();
+        resetProgress();
         fieldPanel.stopGame();
     }
 

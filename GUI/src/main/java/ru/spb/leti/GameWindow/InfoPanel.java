@@ -134,7 +134,7 @@ public class InfoPanel extends JPanel {
         window.getFieldPanel().undo();
     }
 
-    public void resetSettings() {
+    public void resetProgress() {
         undoButton.setEnabled(false);
     }
 

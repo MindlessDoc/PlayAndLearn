@@ -4,11 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80dbfea1-338f-42ab-9e6c-9a1d3429da1b" name="Changes" comment="Игнор системного масштабирвоания">
+    <list default="true" id="80dbfea1-338f-42ab-9e6c-9a1d3429da1b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_19_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_24.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GUI/GUI.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PlayAndLearn.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/model.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/FieldPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/FieldPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/GameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/GameWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/InfoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/InfoPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/StrTransform.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/StrTransform.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,10 +32,11 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="48247046e51a86d7ca9f47019beaf3b6197c8806" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -42,6 +50,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2BRBgXv0Vpi2BDySb9qMmGkAs9J" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -49,8 +58,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../game1.1" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -86,8 +96,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="PlayAndLearn" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="PlayAndLearn" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.StartWindow" />
         <item itemvalue="Application.StartWindow" />
         <item itemvalue="Application.StartWindow" />
       </list>

@@ -142,7 +142,8 @@ public class FieldPanel extends JPanel {
     }
 
     private void displayField() {
-        window.resetSettings();
+        selected = null;
+        window.resetProgress();
         numberOfCorrectCells = 0;
         Cell[][] cellField = game.getField();
         if (cellField == null) {
