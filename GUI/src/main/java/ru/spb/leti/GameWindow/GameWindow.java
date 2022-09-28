@@ -44,6 +44,7 @@ public class GameWindow extends JFrame {
     private int cellXizeY;
 
     private JMenuItem undoMenuItem;
+    private JMenuItem restartGameMenuItem;
 
     private final EventBus eventBus = new EventBus();
 
@@ -143,7 +144,8 @@ public class GameWindow extends JFrame {
         JMenuItem exitMenuItem = new JMenuItem("Выйти");
         exitMenuItem.addActionListener(e -> dispose());
 
-        JMenuItem restartGameMenuItem = new JMenuItem("Начать сначала");
+        restartGameMenuItem = new JMenuItem("Начать сначала");
+        restartGameMenuItem.setEnabled(false);
         restartGameMenuItem.addActionListener(e -> fieldPanel.restartGame());
 
         JMenuItem newGameMenuItem = new JMenuItem("Новая игра");
@@ -268,6 +270,10 @@ public class GameWindow extends JFrame {
         fieldPanel.restartGame();
     }
 
+    public void startGame() {
+        restartGameMenuItem.setEnabled(true);
+    }
+
     public void resetProgress() {
         undoMenuItem.setEnabled(false);
         getInfoPanel().resetProgress();
@@ -275,7 +281,9 @@ public class GameWindow extends JFrame {
 
     private void stopGame() {
         resetProgress();
+        restartGameMenuItem.setEnabled(false);
         fieldPanel.stopGame();
+        infoPanel.gameStopped();
     }
 
     public void continueGame(String filename) {

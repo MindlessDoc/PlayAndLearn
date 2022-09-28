@@ -29,6 +29,7 @@ public class InfoPanel extends JPanel {
     private InfoProgress progress;
     private JCheckBox mixCheckBox;
     private JButton undoButton;
+    private JButton restartButton;
 
     private final int fontSize = Toolkit.getDefaultToolkit().getScreenSize().height / 72;
 
@@ -102,7 +103,8 @@ public class InfoPanel extends JPanel {
 
         constraints.gridy++;
         constraints.weighty = 0.2;
-        JButton restartButton = new JButton("Начать сначала");
+        restartButton = new JButton("Начать сначала");
+        restartButton.setEnabled(false);
         restartButton.setFont(new Font("Arial", Font.BOLD, fontSize));
         restartButton.addActionListener(e -> getWindow().restartGame());
         add(restartButton, constraints);//добавлено
@@ -121,6 +123,7 @@ public class InfoPanel extends JPanel {
     }
 
     public void startAll() {
+        restartButton.setEnabled(true);
         undoButton.setEnabled(false);
         undoButton.setVisible(true);
         progress.setVisible(true);
@@ -128,6 +131,10 @@ public class InfoPanel extends JPanel {
         mistakeCounter.setNumberOfMistakes(0);
         mistakeCounter.setVisible(true);
         timer.restart();
+    }
+
+    public void gameStopped() {
+        restartButton.setEnabled(false);
     }
 
     private void undo() {

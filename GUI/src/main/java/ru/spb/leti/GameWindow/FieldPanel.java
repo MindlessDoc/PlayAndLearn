@@ -190,6 +190,7 @@ public class FieldPanel extends JPanel {
     }
 
     private void starting() {
+        window.startGame();
         window.getInfoPanel().startAll();
         window.getInfoPanel().getProgress().setNumberOfSteps(game.getNumberOfSteps());
         game.nextField();

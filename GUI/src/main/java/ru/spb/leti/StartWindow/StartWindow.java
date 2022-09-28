@@ -209,6 +209,7 @@ public class StartWindow extends JFrame {
 
     public static void main(String[] args) {
         System.setProperty("sun.java2d.uiScale", "1.0");
+
         SwingUtilities.invokeLater(() -> {
             StartWindow startWindow = new StartWindow();
             startWindow.setVisible(true);
