@@ -173,6 +173,7 @@ public class FieldPanel extends JPanel {
         this.selected = null;
 
         JFileChooser fileDialog = new JFileChooser(System.getProperty("user.dir"));
+        fileDialog.setMultiSelectionEnabled(true);
         int approval = fileDialog.showOpenDialog(this);
         if (approval != JFileChooser.APPROVE_OPTION) {
             return;
@@ -182,7 +183,7 @@ public class FieldPanel extends JPanel {
             game.setMixFlag(true);
         }
 
-        if (!game.newLesson(fileDialog.getSelectedFile())) {
+        if (!game.newLesson(fileDialog.getSelectedFiles())) {
             return;
         }
 

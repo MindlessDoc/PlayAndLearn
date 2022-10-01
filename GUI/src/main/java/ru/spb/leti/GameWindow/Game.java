@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -49,7 +50,7 @@ public class Game {
     private boolean oddFlagForDistribution;// Флаг "плохого" размера поля (нечетная вертикаль)
 
     @Getter
-    private File curFile;
+    private File[] curFiles;
 
     public Game(int vertical, int horizontal) {
         setSize(vertical, horizontal);
@@ -83,15 +84,15 @@ public class Game {
     /**
      * Установка нового урока из файла
      *
-     * @param file - файл-словарь
+     * @param files - файлы-словари
      */
-    public boolean newLesson(File file) {
-        curFile = file;
+    public boolean newLesson(File[] files) {
+        curFiles = files;
 
         if (curLesson == null) {
             curLesson = new Lesson();
         }
-        if (curLesson.init(file)) {
+        if (curLesson.init(files)) {
             prepareLesson();
             curLesson.mixDictionary();
             return true;
@@ -106,7 +107,7 @@ public class Game {
         if (curLesson == null) {
             curLesson = new Lesson();
         }
-        if (curLesson.init(curFile)) {
+        if (curLesson.init(curFiles)) {
             prepareLesson();
             curLesson.mixDictionary();
             return true;

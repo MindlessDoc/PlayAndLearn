@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -22,60 +23,66 @@ public class Lesson {
     /**
      * Инициализация урока считыванием пар из файла
      *
-     * @param file - файл
+     * @param files - файлы
      * @return - удачная инициализация - true
      */
-    public boolean init(File file) {
-        try (Scanner scanner = new Scanner(file, "UTF-8")) {
-            dictionary = new ArrayList<>();
-            DictionaryPair pair;
-            if (scanner.hasNext()) {
-                pair = DictionaryPair.read1Pair(scanner);
-                if (pair != null) {
-                    if (isFormatCorrect(pair.getFirst()) && isFormatCorrect(pair.getSecond()))
-                        dictionary.add(pair);
-                    else {
-                        // Сообщение об ошибке в строке словаря ("\e")
-                        JOptionPane.showMessageDialog(null, "Неизвестная управляющая конструкция в строке №" + (dictionary.size() + 1), "Ошибка чтения словаря", JOptionPane.ERROR_MESSAGE, null);
+    public boolean init(File[] files) {
+        dictionary = new ArrayList<>();
+        StringBuilder name = new StringBuilder();
+
+        for (File file : files) {
+            try (Scanner scanner = new Scanner(file, "UTF-8")) {
+                DictionaryPair pair;
+                if (scanner.hasNext()) {
+                    pair = DictionaryPair.read1Pair(scanner);
+                    if (pair != null) {
+                        if (isFormatCorrect(pair.getFirst()) && isFormatCorrect(pair.getSecond()))
+                            dictionary.add(pair);
+                        else {
+                            // Сообщение об ошибке в строке словаря ("\e")
+                            JOptionPane.showMessageDialog(null, "Неизвестная управляющая конструкция в строке №" + (dictionary.size() + 1), "Ошибка чтения словаря", JOptionPane.ERROR_MESSAGE, null);
+                            return false;
+                        }
+                    } else {
+                        // Сообщение об ошибке в словаре
+                        JOptionPane.showMessageDialog(null, "Некорректная строка №" + (dictionary.size() + 1), "Ошибка чтения словаря", JOptionPane.ERROR_MESSAGE, null);
+                        System.out.println("Ошибка в словаре. Строка №" + (dictionary.size() + 1) + "\n");
+                        dictionary.clear();
                         return false;
                     }
-                } else {
-                    // Сообщение об ошибке в словаре
-                    JOptionPane.showMessageDialog(null, "Некорректная строка №" + (dictionary.size() + 1), "Ошибка чтения словаря", JOptionPane.ERROR_MESSAGE, null);
-                    System.out.println("Ошибка в словаре. Строка №" + (dictionary.size() + 1) + "\n");
-                    dictionary.clear();
-                    return false;
                 }
-            }
-            while (scanner.hasNext()) {
-                pair = DictionaryPair.readPair(scanner);
-                if (pair != null) {
-                    if (isFormatCorrect(pair.getFirst()) && isFormatCorrect(pair.getSecond()))
-                        dictionary.add(pair);
-                    else {
-                        // Сообщение об ошибке в строке словаря ("\e")
-                        JOptionPane.showMessageDialog(null, "Неизвестная управляющая конструкция в строке №" + (dictionary.size() + 1), "Ошибка чтения словаря", JOptionPane.ERROR_MESSAGE, null);
+                while (scanner.hasNext()) {
+                    pair = DictionaryPair.readPair(scanner);
+                    if (pair != null) {
+                        if (isFormatCorrect(pair.getFirst()) && isFormatCorrect(pair.getSecond()))
+                            dictionary.add(pair);
+                        else {
+                            // Сообщение об ошибке в строке словаря ("\e")
+                            JOptionPane.showMessageDialog(null, "Неизвестная управляющая конструкция в строке №" + (dictionary.size() + 1), "Ошибка чтения словаря", JOptionPane.ERROR_MESSAGE, null);
+                            return false;
+                        }
+                    } else {
+                        // Сообщение об ошибке в словаре
+                        JOptionPane.showMessageDialog(null, "Некорректная строка №" + (dictionary.size() + 1), "Ошибка чтения словаря", JOptionPane.ERROR_MESSAGE, null);
+                        System.out.println("Ошибка в словаре. Строка №" + (dictionary.size() + 1) + "\n");
+                        dictionary.clear();
                         return false;
                     }
-                } else {
-                    // Сообщение об ошибке в словаре
-                    JOptionPane.showMessageDialog(null, "Некорректная строка №" + (dictionary.size() + 1), "Ошибка чтения словаря", JOptionPane.ERROR_MESSAGE, null);
-                    System.out.println("Ошибка в словаре. Строка №" + (dictionary.size() + 1) + "\n");
-                    dictionary.clear();
-                    return false;
                 }
+            } catch (FileNotFoundException e) {
+                // Сообщение о ненайденном файле
+                JOptionPane.showMessageDialog(null, "Не удалось открыть файл словаря", "Ошибка открытия словаря", JOptionPane.ERROR_MESSAGE, null);
+                return false;
             }
-        } catch (FileNotFoundException e) {
-            // Сообщение о ненайденном файле
-            JOptionPane.showMessageDialog(null, "Не удалось открыть файл словаря", "Ошибка открытия словаря", JOptionPane.ERROR_MESSAGE, null);
-            return false;
+            if (dictionary.isEmpty()) {
+                // Сообщение о ненайденном файле
+                JOptionPane.showMessageDialog(null, "Пустой словарь", "Ошибка словаря словаря", JOptionPane.ERROR_MESSAGE, null);
+                return false;
+            }
+
+            name.append(file.getName()).append(" ");
         }
-        if (dictionary.isEmpty()) {
-            // Сообщение о ненайденном файле
-            JOptionPane.showMessageDialog(null, "Пустой словарь", "Ошибка словаря словаря", JOptionPane.ERROR_MESSAGE, null);
-            return false;
-        }
-        setLessonName(file.getName());
+        setLessonName(name.toString());
         return true;
     }
 

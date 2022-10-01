@@ -10,6 +10,9 @@ import java.awt.Toolkit;
 
 import java.io.File;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -25,15 +28,33 @@ import ru.spb.leti.GameWindow.Game;
 
 
 public class StartWindow extends JFrame {
-    public StartWindow() {
+    public int tableSizeX = 6;
+    public int tableSizeY = 6;
+    public int cellSizeX = 200;
+    public int cellSizeY = 75;
+
+    public StartWindow(List<Integer> params) {
+        initStartParams(params);
         init();
     }
 
-    public int tableSizeX = 4;
-    public int tableSizeY = 7;
-    public int cellSizeX = 428;
-    public int cellSizeY = 107;
+    private void initStartParams(List<Integer> params) {
+        if (params.size() > 0) {
+            tableSizeX = params.get(0);
+        }
 
+        if (params.size() > 1) {
+            tableSizeY = params.get(1);
+        }
+
+        if (params.size() > 2) {
+            cellSizeX = params.get(2);
+        }
+
+        if (params.size() > 3) {
+            cellSizeY = params.get(3);
+        }
+    }
     private void init() {
         System.setProperty("file.encoding", "UTF-8");
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); //получаем разрешение экрана
@@ -210,8 +231,13 @@ public class StartWindow extends JFrame {
     public static void main(String[] args) {
         System.setProperty("sun.java2d.uiScale", "1.0");
 
+        List<Integer> params = new ArrayList<>();
+        for (String arg : args) {
+            params.add(Integer.valueOf(arg));
+        }
+
         SwingUtilities.invokeLater(() -> {
-            StartWindow startWindow = new StartWindow();
+            StartWindow startWindow = new StartWindow(params);
             startWindow.setVisible(true);
         });
     }

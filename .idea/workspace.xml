@@ -9,10 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80dbfea1-338f-42ab-9e6c-9a1d3429da1b" name="Changes" comment="fix: настроил активность кнопки &quot;Начать сначала&quot;">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/GUI_jar.xml" afterDir="false" />
+    <list default="true" id="80dbfea1-338f-42ab-9e6c-9a1d3429da1b" name="Changes" comment="Добавлена логика сборки в jar-архив в pom">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/FieldPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/FieldPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/StartWindow/StartWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/StartWindow/StartWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/src/main/java/ru/spb/leti/pal/Lesson.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/src/main/java/ru/spb/leti/pal/Lesson.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,13 +59,13 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/GUI/src/main/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.1484375" />
     <property name="project.structure.side.proportion" value="0.35632184" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
@@ -79,12 +81,13 @@
       <recent name="C:\Users\tvkoz\IdeaProjects\PlayAndLearn\GUI\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="JAR Application.PlayAndLearn.jar">
+  <component name="RunManager" selected="Application.StartWindow">
     <configuration name="StartWindow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="ru.spb.leti.StartWindow.StartWindow" />
       <module name="GUI" />
+      <option name="PROGRAM_PARAMETERS" value="5 5 160 160" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="ru.spb.leti.StartWindow.*" />
@@ -99,27 +102,14 @@
       <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/PlayAndLearn_jar/PlayAndLearn.jar" />
       <method v="2" />
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="PlayAndLearn" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="PlayAndLearn" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Application.StartWindow" />
       <item itemvalue="JAR Application.PlayAndLearn.jar" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JAR Application.PlayAndLearn.jar" />
         <item itemvalue="Application.StartWindow" />
+        <item itemvalue="JAR Application.PlayAndLearn.jar" />
         <item itemvalue="Application.StartWindow" />
         <item itemvalue="Application.StartWindow" />
       </list>
@@ -142,6 +132,7 @@
       <workItem from="1657087301130" duration="22664000" />
       <workItem from="1657354692560" duration="9000" />
       <workItem from="1662491261932" duration="8715000" />
+      <workItem from="1664579529442" duration="3179000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1656856901316</created>
@@ -262,7 +253,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664358833802</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Добавлена логика сборки в jar-архив в pom">
+      <created>1664368111210</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1664368111210</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -319,7 +317,8 @@
     <MESSAGE value="Игнор системного масштабирвоания" />
     <MESSAGE value="fix: баг при выделении ячейки и нажатии на &quot;Начать сначала&quot;" />
     <MESSAGE value="fix: настроил активность кнопки &quot;Начать сначала&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: настроил активность кнопки &quot;Начать сначала&quot;" />
+    <MESSAGE value="Добавлена логика сборки в jar-архив в pom" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлена логика сборки в jar-архив в pom" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -330,23 +329,38 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/Game.java</url>
-          <line>159</line>
+          <line>160</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/Game.java</url>
-          <line>158</line>
+          <line>159</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/Game.java</url>
-          <line>175</line>
+          <line>176</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/Game.java</url>
-          <line>176</line>
+          <line>177</line>
           <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/model/src/main/java/ru/spb/leti/pal/Lesson.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/GameWindow/FieldPanel.java</url>
+          <line>180</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/GUI/src/main/java/ru/spb/leti/StartWindow/StartWindow.java</url>
+          <line>228</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
